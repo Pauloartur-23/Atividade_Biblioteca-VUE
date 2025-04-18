@@ -27,8 +27,8 @@
       <a class="image-links" href="#"><img src="../src/components/img/user-solid.svg" alt="User"></a>
   </header>
   <main>
-    <section id="first-section">
-      <div id="first-section-text">
+    <section id="offer">
+      <div id="offer-text">
         <button id="autor-button">Autor de Abril</button>
         <h1>Eric-Emanuel Schmitt </h1>
         <p>Eric-Emmanuel Schmitt has been awarded more than 20 literary prizes and distinctions, and in 2001 he received the title of Chevalier des Arts et des Lettres. His books have been translated into over 40 languages.</p>
@@ -38,6 +38,9 @@
         <img src="../src/components/img/first-section-book.png" alt="">
         <p>*within the stock limit</p>
       </div>
+    </section>
+    <section>
+      
     </section>
   </main>
 </template>
@@ -82,7 +85,7 @@ header #input-search{
   border: none;
   color: #B8B8B8;
   padding: 0.7rem 1rem;
-  border-radius: 5px;
+  border-radius: 2px;
   width: 30em;
   transition: all ease-in-out .5s;
   margin-right: -2vw;
@@ -121,41 +124,41 @@ header .divisao-links{
 main{
   background-color: white;
 }
-main #first-section {
+main #offer {
   display: flex;
   justify-content: space-between;
   padding: 2vw 15vw;
   border: 2px #27AE60 solid;
 
 }
-main #first-section #first-section-text {
+main #offer #offer-text {
   padding-top: 8vw;
 }
-main #first-section #first-section-text #autor-button{
+main #offer #offer-text #autor-button{
   background-color: white;
   border: 2px #27AE60 solid;
-  border-radius: 5px;
+  border-radius: 2px;
   color: #27AE60;
   padding: 0.5vw 1vw 0.5vw 1vw;
   margin-bottom: 1vw;
 }
-main #first-section #first-section-text h1{
+main #offer #offer-text h1{
   font-weight: bold;
   color: #382C2C;
   font-size: 2.5rem;
   margin-bottom: 1vw;
 }
-main #first-section #first-section-text p{
+main #offer #offer-text p{
   color: #4D4C4C;
   padding-right: 15vw;
   margin-bottom: 2vw;
 }
-main #first-section #first-section-text #acessar-button{
+main #offer #offer-text #acessar-button{
   background-color: #27AE60;
   color: white;
-  padding: 0.5vw 1vw 0.5vw 1vw;
+  padding: 1vw 2vw 1vw 2vw;
   border: none;
-  border-radius: 5px;
+  border-radius: 2px;
   font-size: 1.1rem;
 }
 
