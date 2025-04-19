@@ -1,5 +1,5 @@
 <script setup>
-
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
@@ -21,9 +21,9 @@
         <li><a href="#">Devoluções</a></li>
       </ul>
     </nav>
-      <a class="image-links" href="#"><img  src="../src/components/img/cart-shopping-solid.svg" alt="Carrinho"></a> 
+      <RouterLink class="image-links" to="/carrinho"><img src="../src/components/img/cart-shopping-solid.svg" alt="Carrinho"></RouterLink> 
       <p class="divisao-links">|</p>
-      <a class="image-links" href="#"><img  src="../src/components/img/heart-solid.svg" alt="Coração"></a> 
+      <a class="image-links" href="#"><img src="../src/components/img/heart-solid.svg" alt="Coração"></a> 
       <p class="divisao-links">|</p>
       <a class="image-links" href="#"><img src="../src/components/img/user-solid.svg" alt="User"></a>
   </header>
@@ -57,8 +57,4 @@
 </template>
 
 <style scoped>
-/*======================
-        HEADER
-======================*/
-
 </style>
