@@ -87,7 +87,7 @@ header{
           MAIN #home
   ======================*/
   main#home{
-    display: none;
+    display: block;
     background-color: white;
   }
   /*======================
