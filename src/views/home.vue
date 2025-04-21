@@ -1,4 +1,6 @@
 <script setup>
+import { useCartStore } from '../stores/store'
+import { useRouter } from 'vue-router'
 import ChainOfIron2 from '../components/img-books/Chain_of_Iron_Volume_2.png'
 import ChainOfThorns from '../components/img-books/Chain_of_Thorns.png'
 import CityOfFallenAngels from '../components/img-books/City_of_Fallen_Angels.png'
@@ -11,6 +13,9 @@ import FirstSectionBook from '../components/img/first-section-book.png'
 import TruckIcon from '../components/img/truck-solid.svg'
 import StarIcon from '../components/img/star-solid.svg'
 import BookIcon from '../components/img/book-open-solid.svg'
+
+const router = useRouter()
+const cartStore = useCartStore()
 
 const livros = [
   {
@@ -70,6 +75,15 @@ const livros = [
     id: '8',
   }
 ]
+
+const addToCart = (livro) => {
+  cartStore.addItem(livro)
+  router.push('/carrinho')
+}
+
+const toggleFavorite = (livroId) => {
+  cartStore.toggleFavorite(livroId)
+}
 </script>
 
 <template>
@@ -115,10 +129,16 @@ const livros = [
           <p>{{ livro.autor }}</p>
           <div id="space-div">
             <p>{{ livro.preco }}</p>
-            <span class="fa-solid fa-heart" style="color: #27ae60;"></span>
+            <span 
+              class="fa-solid fa-heart" 
+              :style="{ color: cartStore.isFavorite(livro.id) ? 'red' : '#27ae60' }"
+              @click="toggleFavorite(livro.id)"
+            ></span>
           </div>
-            <button> <span class="fa-solid fa-cart-shopping" style="color: #ffffff;"></span>
-            Comprar</button>
+          <button @click="addToCart(livro)">
+            <span class="fa-solid fa-cart-shopping" style="color: #ffffff;"></span>
+            Comprar
+          </button>
         </li>
       </ul>
     </section>
@@ -140,7 +160,6 @@ const livros = [
     display: flex;
     justify-content: space-between;
     padding: 2vw 15vw;
-    border: 2px #27AE60 solid;
   
   }
   main #offer #offer-text {
@@ -153,7 +172,13 @@ const livros = [
     color: #27AE60;
     padding: 0.5vw 1vw 0.5vw 1vw;
     margin-bottom: 1vw;
+    transition: all ease-in-out .5s;
   }
+  main #offer #offer-text #autor-button:hover{
+    border: 2px #1d8046 solid;
+    color: #1d8046;
+  }
+
   main #offer #offer-text h1{
     font-weight: bold;
     color: #382C2C;
@@ -172,6 +197,11 @@ const livros = [
     border: none;
     border-radius: 2px;
     font-size: 1.1rem;
+    transition: all ease-in-out .5s;
+  }
+  main #offer #offer-text #acessar-button:hover{
+    background-color: #1d8046;
+    color: white;
   }
   /*======================
      SECTION #BENEFICT
@@ -181,6 +211,7 @@ const livros = [
     justify-content: space-between;
     padding: 2vw 10vw;
     border-bottom: 2px #27AE60 solid;
+    border-top: 2px #27AE60 solid;
   }
   main #benefict div{
     padding-right: 7vw ;
@@ -198,7 +229,11 @@ const livros = [
     font-size: 1.5rem;
     padding-left: 1vw;
     font-weight: bold;
+    transition: all ease-in-out .5s;
   }
+  main #benefict div h3:hover{
+    text-decoration: underline;
+  } 
   main #benefict a{
     color: #382C2C;
     text-decoration: none;
@@ -246,14 +281,20 @@ const livros = [
   main #releases ul li #space-div span{
     margin-right: 1vw;
     font-size: 1.2rem;
+    cursor: pointer;
+    transition: all ease-in-out .3s;
   }
   main #releases button {
-    padding: 0.5vw 0;
+    padding: 1vw 0;
     background-color: #27AE60;
     color: white;
     border: none;
     border-radius: 2px;
     width: 100%;
+    font-size: 1.1rem;
+    transition: all ease-in-out .5s;
   }
-  
+  main #releases button:hover{
+    background-color: #1d8046;
+  }
 </style> 
