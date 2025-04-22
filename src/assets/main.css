@@ -9,7 +9,7 @@
           HEADER
   ======================*/
 header{
-    padding: 1vw 10vw;
+    padding: 1vw 15vw;
     background-color: white;
     display: flex;
     justify-content: space-between;
@@ -83,7 +83,7 @@ header{
     padding-top: 1vw;
   }
   header .divisao-links{
-    font-size: 25px;
+    font-size: 30px;
     color: #27AE60;
   }
   
@@ -101,7 +101,7 @@ header{
   footer #space-footer{
     display: flex;
     justify-content: space-between;
-    padding: 0vw 10vw 2vw 10vw;
+    padding: 0vw 15vw 2vw 15vw;
     border-bottom: 1px white solid;
   }
   footer #space-footer div ul{

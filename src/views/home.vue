@@ -97,7 +97,6 @@ const toggleFavorite = (livroId) => {
       </div>
       <div>
         <img :src="FirstSectionBook" alt="">
-        <p>*within the stock limit</p>
       </div>
     </section>
     <section id="benefict">
@@ -240,10 +239,10 @@ const toggleFavorite = (livroId) => {
     font-weight: bold;
   }
   /*======================
-     SECTION #rRELEASES
+     SECTION #RELEASES
   ======================*/
   main #releases {
-    padding: 5vw 10vw 5vw 8vw;
+    padding: 5vw 15vw 5vw 13vw;
   }
   main #releases h2{
     font-size: 2rem;
@@ -257,7 +256,7 @@ const toggleFavorite = (livroId) => {
     flex-wrap: wrap;
   }
   main #releases ul li {
-    margin-right: 1.69vw;
+    margin-right: 2vw;
     margin-bottom: 5vw;
   }
   main #releases ul li h4{

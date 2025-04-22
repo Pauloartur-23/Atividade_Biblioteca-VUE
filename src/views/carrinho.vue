@@ -122,7 +122,7 @@ const removeCoupon = () => {
 
 <style scoped>
 main {
-  padding: 5vw 10vw;
+  padding: 5vw 15vw;
   margin: 0 auto;
   background-color: white;
 }

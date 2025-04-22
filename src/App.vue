@@ -16,7 +16,7 @@ import { RouterLink } from 'vue-router'
     <nav>
       <ul id="header-page-links">
         <li><a href="#">Termos</a></li>
-        <li><a href="#">Equpe</a></li>
+        <li><a href="#">Equipe</a></li>
         <li><a href="#">Envio</a></li>
         <li><a href="#">Devoluções</a></li>
       </ul>
