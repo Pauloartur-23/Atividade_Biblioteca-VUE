@@ -9,10 +9,10 @@ import HarlemShuffle from '../components/img-books/Harlem_Shuffle.png'
 import TwoOldWomen from '../components/img-books/Two_Old_Women.png'
 import CarrieSoto from '../components/img-books/Carrie_Soto_Is_Back.png'
 import BookLovers from '../components/img-books/Book_Lovers.png'
-import FirstSectionBook from '../components/img/first-section-book.png'
-import TruckIcon from '../components/img/truck-solid.svg'
-import StarIcon from '../components/img/star-solid.svg'
-import BookIcon from '../components/img/book-open-solid.svg'
+import FirstSectionBook from '../components/img-home.vue/first-section-book.png'
+import TruckIcon from '../components/img-home.vue/truck-solid.svg'
+import StarIcon from '../components/img-home.vue/star-solid.svg'
+import BookIcon from '../components/img-home.vue/book-open-solid.svg'
 
 const router = useRouter()
 const cartStore = useCartStore()

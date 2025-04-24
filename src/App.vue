@@ -11,7 +11,7 @@ import { RouterLink } from 'vue-router'
     </div>
     <div id="search">
       <input type="text" placeholder="Pesquisar" id="input-search">
-    <img id="image-search" src="../src/components/img/magnifying-glass.svg" alt="Lupa">
+    <img id="image-search" src="../src/components/img-app.vue/magnifying-glass.svg" alt="Lupa">
     </div>
     <nav>
       <ul id="header-page-links">
@@ -21,11 +21,11 @@ import { RouterLink } from 'vue-router'
         <li><a href="#">Devoluções</a></li>
       </ul>
     </nav>
-      <RouterLink class="image-links" to="/carrinho"><img src="../src/components/img/cart-shopping-solid.svg" alt="Carrinho"></RouterLink> 
+      <RouterLink class="image-links" to="/carrinho"><img src="../src/components/img-app.vue/cart-shopping-solid.svg" alt="Carrinho"></RouterLink> 
       <p class="divisao-links">|</p>
-      <a class="image-links" href="#"><img src="../src/components/img/heart-solid.svg" alt="Coração"></a> 
+      <a class="image-links" href="#"><img src="../src/components/img-app.vue/heart-solid.svg" alt="Coração"></a> 
       <p class="divisao-links">|</p>
-      <a class="image-links" href="#"><img src="../src/components/img/user-solid.svg" alt="User"></a>
+      <a class="image-links" href="#"><img src="../src/components/img-app.vue/user-solid.svg" alt="User"></a>
   </header>
   <router-view></router-view>
   <footer>
@@ -46,9 +46,9 @@ import { RouterLink } from 'vue-router'
           <li><i class="fa-solid fa-envelope" style="color: #ffffff;"></i> contato@ifbooks.com</li>
         </ul>
         <div id="div-img-footer">
-          <img src="../src/components/img-footer/paipal 1.png" alt="PaiPal">
-          <img src="../src/components/img-footer/MasterCard-Logo-1979 1.png" alt="MasterCard">
-          <img src="../src/components/img-footer/VISA-card-logo- 1.png" alt="VISA">
+          <img src="../src/components/img-app.vue/paipal.png" alt="PaiPal">
+          <img src="../src/components/img-app.vue/MasterCard.png" alt="MasterCard">
+          <img src="../src/components/img-app.vue/VISA.png" alt="VISA">
         </div>
       </div>
     </div>
