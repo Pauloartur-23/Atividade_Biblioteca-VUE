@@ -23,7 +23,7 @@ import { RouterLink } from 'vue-router'
     </nav>
       <RouterLink class="image-links" to="/carrinho"><img src="../src/components/img-app.vue/cart-shopping-solid.svg" alt="Carrinho"></RouterLink> 
       <p class="divisao-links">|</p>
-      <a class="image-links" href="#"><img src="../src/components/img-app.vue/heart-solid.svg" alt="Coração"></a> 
+      <RouterLink class="image-links" to="/like"><img src="../src/components/img-app.vue/heart-solid.svg" alt="Coração"></RouterLink> 
       <p class="divisao-links">|</p>
       <a class="image-links" href="#"><img src="../src/components/img-app.vue/user-solid.svg" alt="User"></a>
   </header>

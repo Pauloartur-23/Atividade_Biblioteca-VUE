@@ -4,7 +4,8 @@ export const useCartStore = defineStore('cart', {
   state: () => ({
     items: [],
     discount: 0,
-    discountCode: ''
+    discountCode: '',
+    favorites: []
   }),
 
   getters: {
@@ -41,6 +42,16 @@ export const useCartStore = defineStore('cart', {
       this.items = this.items.filter(item => item.id !== itemId)
     },
 
+    addItemLike(livro) {
+      const existinglivro = this.favorites.find(i => i.id === livro.id)
+      if (!existinglivro) {
+        this.favorites.push({ ...livro, quantity: 1 })
+      }
+    },
+    removeItemLike(itemId) {
+      this.items = this.items.filter(item => item.id !== itemId)
+    },
+
     updateQuantity(itemId, newQuantity) {
       const item = this.items.find(i => i.id === itemId)
       if (item) {
@@ -62,5 +73,5 @@ export const useCartStore = defineStore('cart', {
       this.discount = 0
       this.discountCode = ''
     }
-  }
+  },
 }) 

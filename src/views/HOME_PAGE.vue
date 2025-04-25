@@ -83,11 +83,15 @@ const addToCart = (livro) => {
   router.push('/carrinho')
 }
 
+const addToCartLike = (livro) => {
+  cartStore.addItemLike(livro)
+}
 const toggleFavorite = (livroId) => {
   if (favorite.value.includes(livroId)) {
     favorite.value = favorite.value.filter(id => id !== livroId)
   } else {
     favorite.value.push(livroId)
+    cartStore.favorites.push(livroId)
   }
 }
 const isFavorite = (livroId) => favorite.value.includes(livroId)
@@ -138,7 +142,7 @@ const isFavorite = (livroId) => favorite.value.includes(livroId)
             <span 
               class="fa-solid fa-heart" 
               :style="{ color: isFavorite(livro.id) ? 'red' : '#27ae60' }"
-              @click="toggleFavorite(livro.id)"
+              @click="addToCartLike(livro),toggleFavorite(livro.id)"
             ></span>
           </div>
           <button @click="addToCart(livro)">
