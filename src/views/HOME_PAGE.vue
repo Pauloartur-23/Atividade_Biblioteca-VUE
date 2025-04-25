@@ -1,6 +1,7 @@
 <script setup>
 import { useCartStore } from '../stores/store'
-import { useRouter } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
+import { ref, computed } from 'vue'
 import ChainOfIron2 from '../components/img-books/Chain_of_Iron_Volume_2.png'
 import ChainOfThorns from '../components/img-books/Chain_of_Thorns.png'
 import CityOfFallenAngels from '../components/img-books/City_of_Fallen_Angels.png'
@@ -16,6 +17,7 @@ import BookIcon from '../components/img-home.vue/book-open-solid.svg'
 
 const router = useRouter()
 const cartStore = useCartStore()
+const favorite = ref([])
 
 const livros = [
   {
@@ -82,8 +84,13 @@ const addToCart = (livro) => {
 }
 
 const toggleFavorite = (livroId) => {
-  cartStore.toggleFavorite(livroId)
+  if (favorite.value.includes(livroId)) {
+    favorite.value = favorite.value.filter(id => id !== livroId)
+  } else {
+    favorite.value.push(livroId)
+  }
 }
+const isFavorite = (livroId) => favorite.value.includes(livroId)
 </script>
 
 <template>
@@ -130,7 +137,7 @@ const toggleFavorite = (livroId) => {
             <p>{{ livro.preco }}</p>
             <span 
               class="fa-solid fa-heart" 
-              :style="{ color: cartStore.isFavorite(livro.id) ? 'red' : '#27ae60' }"
+              :style="{ color: isFavorite(livro.id) ? 'red' : '#27ae60' }"
               @click="toggleFavorite(livro.id)"
             ></span>
           </div>
@@ -146,7 +153,7 @@ const toggleFavorite = (livroId) => {
 
 <style scoped>
 /*======================
-          MAIN #home
+          MAIN #HOME
   ======================*/
   main#home{
     display: block;

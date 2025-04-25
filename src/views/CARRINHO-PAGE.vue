@@ -22,10 +22,13 @@ const calculateSubtotal = (item) => {
 }
 
 const applyCoupon = () => {
-  const couponCode = document.querySelector('.coupon-section input').value.trim()
+  const couponInput = document.querySelector('.coupon-section input')
+  const couponCode = couponInput.value.trim()
+  
   if (couponCode === 'Kennedy10') {
     cartStore.applyCoupon(couponCode)
-    document.querySelector('.coupon-section input').value = '10%'
+  } else if (couponCode === 'Eduardo20') {
+    cartStore.applyCoupon(couponCode)
   }
 }
 

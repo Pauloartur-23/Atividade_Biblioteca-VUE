@@ -3,32 +3,35 @@ import { defineStore } from 'pinia'
 export const useCartStore = defineStore('cart', {
   state: () => ({
     items: [],
-    favorites: [],
     discount: 0,
     discountCode: ''
   }),
 
   getters: {
-    totalItems: (state) => state.items.reduce((total, item) => total + item.quantity, 0),
-    subtotal: (state) => state.items.reduce((total, item) => {
-      const price = parseFloat(item.preco.replace('R$', ''))
-      return total + (price * item.quantity)
-    }, 0),
-    totalPrice: (state) => {
-      const subtotal = state.items.reduce((total, item) => {
+    subtotal: (state) => {
+      let total = 0
+      for (const item of state.items) {
         const price = parseFloat(item.preco.replace('R$', ''))
-        return total + (price * item.quantity)
-      }, 0)
-      return subtotal * (1 - state.discount)
+        total += price * item.quantity
+      }
+      return total
     },
-    isFavorite: (state) => (itemId) => state.favorites.includes(itemId)
+
+    totalPrice: (state) => {
+      const subtotal = state.subtotal
+      if (state.discount > 0) {
+        return subtotal * (1 - state.discount)
+      } else {
+        return subtotal
+      }
+    },
   },
 
   actions: {
     addItem(item) {
       const existingItem = this.items.find(i => i.id === item.id)
       if (existingItem) {
-        existingItem.quantity += 1
+        existingItem.quantity++
       } else {
         this.items.push({ ...item, quantity: 1 })
       }
@@ -44,23 +47,13 @@ export const useCartStore = defineStore('cart', {
         item.quantity = newQuantity
       }
     },
-
-    clearCart() {
-      this.items = []
-    },
-
-    toggleFavorite(itemId) {
-      const index = this.favorites.indexOf(itemId)
-      if (index === -1) {
-        this.favorites.push(itemId)
-      } else {
-        this.favorites.splice(index, 1)
-      }
-    },
-
+    
     applyCoupon(code) {
       if (code === 'Kennedy10') {
         this.discount = 0.1
+        this.discountCode = code
+      } else if (code === 'Eduardo20') {
+        this.discount = 0.2
         this.discountCode = code
       }
     },
