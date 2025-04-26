@@ -25,7 +25,7 @@ import { RouterLink } from 'vue-router'
       <p class="divisao-links">|</p>
       <RouterLink class="image-links" to="/like"><img src="../src/components/img-app.vue/heart-solid.svg" alt="Coração"></RouterLink> 
       <p class="divisao-links">|</p>
-      <a class="image-links" href="#"><img src="../src/components/img-app.vue/user-solid.svg" alt="User"></a>
+      <RouterLink class="image-links" to="/login"><img src="../src/components/img-app.vue/user-solid.svg" alt="User"></RouterLink>
   </header>
   <router-view></router-view>
   <footer>
