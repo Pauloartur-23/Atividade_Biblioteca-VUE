@@ -180,8 +180,8 @@ main #carrinho-code .item-info {
 }
 
 main #carrinho-code .item-info img {
-  width: 100px;
-  height: 150px;
+  width: 120px;
+  height: auto;
   object-fit: cover;
 }
 

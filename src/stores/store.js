@@ -48,8 +48,9 @@ export const useCartStore = defineStore('cart', {
         this.favorites.push({ ...livro, quantity: 1 })
       }
     },
+
     removeItemLike(itemId) {
-      this.items = this.items.filter(item => item.id !== itemId)
+      this.favorites = this.favorites.filter(item => item.id !== itemId)
     },
 
     updateQuantity(itemId, newQuantity) {
