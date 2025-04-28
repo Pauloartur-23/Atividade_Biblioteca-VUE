@@ -1,7 +1,7 @@
 <script setup>
 import { useCartStore } from '../stores/store'
-import { RouterLink, useRouter } from 'vue-router'
-import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 import ChainOfIron2 from '../components/img-books/Chain_of_Iron_Volume_2.png'
 import ChainOfThorns from '../components/img-books/Chain_of_Thorns.png'
 import CityOfFallenAngels from '../components/img-books/City_of_Fallen_Angels.png'
@@ -11,9 +11,6 @@ import TwoOldWomen from '../components/img-books/Two_Old_Women.png'
 import CarrieSoto from '../components/img-books/Carrie_Soto_Is_Back.png'
 import BookLovers from '../components/img-books/Book_Lovers.png'
 import FirstSectionBook from '../components/img-home.vue/first-section-book.png'
-import TruckIcon from '../components/img-home.vue/truck-solid.svg'
-import StarIcon from '../components/img-home.vue/star-solid.svg'
-import BookIcon from '../components/img-home.vue/book-open-solid.svg'
 
 const router = useRouter()
 const cartStore = useCartStore()
@@ -109,19 +106,19 @@ const isFavorite = (livroId) => favorite.value.includes(livroId)
     <section id="benefict">
       <a href="#">
         <div>
-          <img :src="TruckIcon" alt="Caminhão">
-          <h3>Frete grátis para SC</h3>
+          <span class="mdi mdi-truck" style="color: #382C2C;"></span>
+          <h3><a href="#">Frete grátis para SC</a></h3>
         </div>
       </a>
       <a href="#">
         <div>
-          <img :src="StarIcon" alt="Estrela">
+          <span class="mdi mdi-star" style="color: #382C2C;"></span>
           <h3><a href="#">Livros recomendados</a></h3>
         </div>
       </a>
       <a href="#">
         <div id="last-benefict">
-          <img :src="BookIcon" alt="Livro">
+          <span class="mdi mdi-book-open-page-variant" style="color: #382C2C;"></span>
           <h3><a href="#">Mais vendidos</a></h3>
         </div>
      </a>
@@ -136,13 +133,13 @@ const isFavorite = (livroId) => favorite.value.includes(livroId)
           <div id="space-div">
             <p>{{ livro.preco }}</p>
             <span 
-              class="fa-solid fa-heart" 
-              :style="{ color: isFavorite(livro.id) ? 'red' : '#27ae60' }"
-              @click="toggleFavorite(livro.id)"
+            class="mdi mdi-heart"
+            :style="{ color: isFavorite(livro.id) ? 'red' : '#27ae60' }"
+             @click="toggleFavorite(livro.id)"
             ></span>
           </div>
           <button @click="addToCart(livro)">
-            <span class="fa-solid fa-cart-shopping" style="color: #ffffff;"></span>
+            <span class="mdi mdi-cart" style="color: white;"></span>
             Comprar
           </button>
         </li>
@@ -228,16 +225,17 @@ const isFavorite = (livroId) => favorite.value.includes(livroId)
     padding-right: 0;
     border-right: none;
   }
-  main #benefict div img {
-    width: 50px;
+  main #benefict div span {
+    font-size: 50px;
   }
   main #benefict div h3{
     font-size: 1.5rem;
+    margin-top: 1vw;
     padding-left: 1vw;
     font-weight: bold;
     transition: all ease-in-out .5s;
   }
-  main #benefict div h3:hover{
+  main #benefict div h3 a:hover{
     text-decoration: underline;
   } 
   main #benefict a{
@@ -278,18 +276,18 @@ const isFavorite = (livroId) => favorite.value.includes(livroId)
   main #releases ul li #space-div{
     display: flex;
     justify-content: space-between;
-    margin-bottom: 1.5vw;
+    margin-bottom: 1vw;
   }
   main #releases ul li #space-div p {
     font-weight: bold;
     color: #382C2C;
   }
   main #releases ul li #space-div span{
-    margin-right: 1vw;
-    font-size: 1.2rem;
+    margin-right: 0.5vw;
+    font-size: 1.5rem;
     cursor: pointer;
-    transition: all ease-in-out .3s;
   }
+  
   main #releases button {
     padding: 1vw 0;
     background-color: #27AE60;

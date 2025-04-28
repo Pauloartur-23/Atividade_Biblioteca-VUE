@@ -21,11 +21,12 @@ import { RouterLink } from 'vue-router'
         <li><a href="#">Devoluções</a></li>
       </ul>
     </nav>
-      <RouterLink class="image-links" to="/carrinho"><img src="../src/components/img-app.vue/cart-shopping-solid.svg" alt="Carrinho"></RouterLink> 
+   
+      <RouterLink class="image-links" to="/carrinho"> <span class="mdi mdi-cart" style="color: #27AE60; font-size: 1.5rem;"></span></RouterLink> 
       <p class="divisao-links">|</p>
-      <a class="image-links" href="#"><img src="../src/components/img-app.vue/heart-solid.svg" alt="Coração"></a> 
+      <a class="image-links" href="#"><span class="mdi mdi-heart" style="color: #27AE60; font-size: 1.5rem;"></span></a> 
       <p class="divisao-links">|</p>
-      <a class="image-links" href="#"><img src="../src/components/img-app.vue/user-solid.svg" alt="User"></a>
+      <a class="image-links" href="#"><span class="mdi mdi-account" style="color: #27AE60; font-size: 1.5rem;"></span></a>
   </header>
   <router-view></router-view>
   <footer>
@@ -57,4 +58,5 @@ import { RouterLink } from 'vue-router'
 </template>
 
 <style scoped>
+
 </style>
