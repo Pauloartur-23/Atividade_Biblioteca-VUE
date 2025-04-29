@@ -247,7 +247,7 @@ const isFavorite = (livroId) => favorite.value.includes(livroId)
      SECTION #RELEASES
   ======================*/
   main #releases {
-    padding: 5vw 15vw 5vw 13vw;
+    padding: 5vw 13.5vw 5vw 15vw;
   }
   main #releases h2{
     font-size: 2rem;
@@ -261,7 +261,7 @@ const isFavorite = (livroId) => favorite.value.includes(livroId)
     flex-wrap: wrap;
   }
   main #releases ul li {
-    margin-right: 2vw;
+    margin-right: 1.5vw;
     margin-bottom: 5vw;
   }
   main #releases ul li h4{
@@ -286,6 +286,7 @@ const isFavorite = (livroId) => favorite.value.includes(livroId)
     margin-right: 0.5vw;
     font-size: 1.5rem;
     cursor: pointer;
+    transition: 0.4s ease-in-out;
   }
   
   main #releases button {

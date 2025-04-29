@@ -34,17 +34,17 @@ import { RouterLink } from 'vue-router'
       <div id="div-ifbooks-footer">
         <p>IFbooks</p>
         <ul>
-          <li><a href="#"><span class="fa-brands fa-square-facebook" style="color: #ffffff;"></span></a></li>
-          <li><a href="#"><span class="fa-brands fa-square-instagram" style="color: #ffffff;"></span></a></li>
-          <li><a href="#"><span class="fa-brands fa-square-twitter" style="color: #ffffff;"></span></a></li>
+          <li><a href="#"><span class="mdi mdi-facebook" style="color: white;"></span></a></li>
+          <li><a href="#"><span class="mdi mdi-instagram" style="color: white;"></span></a></li>
+          <li><a href="#"><span class="mdi mdi-twitter" style="color: white;"></span></a></li>
         </ul>
       </div>
       <div id="div-contato-footer">
         <p>Contato</p>
         <ul>
-          <li><i class="fa-solid fa-phone" style="color: #ffffff;"></i> +55 47 40045263</li>
-          <li><i class="fa-solid fa-clock" style="color: #ffffff;"></i> 8h às 23h - Seg a Sex</li>
-          <li><i class="fa-solid fa-envelope" style="color: #ffffff;"></i> contato@ifbooks.com</li>
+          <li><span class="mdi mdi-phone" style="color: white;"></span> +55 47 40045263</li>
+          <li><span class="mdi mdi-clock" style="color: white;"></span> 8h às 23h - Seg a Sex</li>
+          <li><span class="mdi mdi-email" style="color: white;"></span> contato@ifbooks.com</li>
         </ul>
         <div id="div-img-footer">
           <img src="../src/components/img-app.vue/paipal.png" alt="PaiPal">
