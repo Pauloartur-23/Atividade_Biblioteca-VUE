@@ -21,11 +21,11 @@ import { RouterLink } from 'vue-router'
         <li><a href="#">Devoluções</a></li>
       </ul>
     </nav>
-      <RouterLink class="image-links" to="/carrinho"><img src="../src/components/img-app.vue/cart-shopping-solid.svg" alt="Carrinho"></RouterLink> 
+      <RouterLink class="image-links" to="/carrinho"><span class="mdi mdi-cart" style="color: #27ae60;"></span></RouterLink> 
       <p class="divisao-links">|</p>
-      <RouterLink class="image-links" to="/like"><img src="../src/components/img-app.vue/heart-solid.svg" alt="Coração"></RouterLink> 
+      <RouterLink class="image-links" to="/like"><span class="mdi mdi-heart" style="color: #27ae60;"></span></RouterLink> 
       <p class="divisao-links">|</p>
-      <RouterLink class="image-links" to="/login"><img src="../src/components/img-app.vue/user-solid.svg" alt="User"></RouterLink>
+      <RouterLink class="image-links" to="/login"><span class="mdi mdi-account" style="color: #27ae60;"></span></RouterLink>
   </header>
   <router-view></router-view>
   <footer>
@@ -41,9 +41,9 @@ import { RouterLink } from 'vue-router'
       <div id="div-contato-footer">
         <p>Contato</p>
         <ul>
-          <li><i class="fa-solid fa-phone" style="color: #ffffff;"></i> +55 47 40045263</li>
-          <li><i class="fa-solid fa-clock" style="color: #ffffff;"></i> 8h às 23h - Seg a Sex</li>
-          <li><i class="fa-solid fa-envelope" style="color: #ffffff;"></i> contato@ifbooks.com</li>
+          <li><span class="mdi mdi-phone" style="color: #ffffff;"></span> +55 47 40045263</li>
+          <li><span class="mdi mdi-clock" style="color: #ffffff;"></span> 8h às 23h - Seg a Sex</li>
+          <li><span class="mdi mdi-email" style="color: #ffffff;"></span> contato@ifbooks.com</li>
         </ul>
         <div id="div-img-footer">
           <img src="../src/components/img-app.vue/paipal.png" alt="PaiPal">

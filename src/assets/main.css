@@ -76,11 +76,11 @@ header{
   header #header-page-links li a:hover{
     text-decoration: underline;
   }
-  header .image-links img {
-    width: 20px;
+  header .image-links span {
+    font-size: 1.5rem;
   }
   header .image-links {
-    padding-top: 1vw;
+    padding-top: 0.5vw;
   }
   header .divisao-links{
     font-size: 30px;

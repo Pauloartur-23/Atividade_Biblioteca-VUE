@@ -1,7 +1,7 @@
 <script setup>
 import { useCartStore } from '../stores/store'
-import { RouterLink, useRouter } from 'vue-router'
-import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { ref } from 'vue'
 import ChainOfIron2 from '../components/img-books/Chain_of_Iron_Volume_2.png'
 import ChainOfThorns from '../components/img-books/Chain_of_Thorns.png'
 import CityOfFallenAngels from '../components/img-books/City_of_Fallen_Angels.png'
@@ -149,10 +149,10 @@ const isFavorite = (livroId) => favorite.value.includes(livroId)
             <p>{{ livro.preco }}</p>
             <span v-if="!isFavorite(livro.id)" class="fa-solid fa-heart" :style="{ color: '#27ae60' }"
               @click="toggleFavorite(livro)"></span>
-            <span v-else class="fa-solid fa-heart" :style="{ color: 'red' }" @click="toggleFavorite(livro)"></span>
+            <span v-else class="mdi mdi-heart" :style="{ color: 'red' }" style="font-size: 1.5rem; margin: -0.5vw 0.5vw -0.5vw 0;" @click="toggleFavorite(livro)"></span>
           </div>
           <button @click="addToCart(livro)">
-            <span class="fa-solid fa-cart-shopping" style="color: #ffffff;"></span>
+            <span class="mdi mdi-cart" style="color: #ffffff;"></span>
             Comprar
           </button>
         </li>
@@ -274,7 +274,7 @@ main #benefict a {
      SECTION #RELEASES
   ======================*/
 main #releases {
-  padding: 5vw 15vw 5vw 13vw;
+  padding: 5vw 13.5vw 5vw 15vw;
 }
 
 main #releases h2 {
@@ -291,7 +291,7 @@ main #releases ul {
 }
 
 main #releases ul li {
-  margin-right: 2vw;
+  margin-right: 1.5vw;
   margin-bottom: 5vw;
 }
 
@@ -317,7 +317,7 @@ main #releases ul li #space-div p {
 }
 
 main #releases ul li #space-div span {
-  margin-right: 1vw;
+  margin-right: 0.5vw;
   font-size: 1.2rem;
   cursor: pointer;
   transition: all ease-in-out .3s;
