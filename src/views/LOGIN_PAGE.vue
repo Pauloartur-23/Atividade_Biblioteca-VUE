@@ -20,7 +20,7 @@ const toggleForm = () => {
                     <p>Crie uma conta agora mesmo</p>
                     <button @click="toggleForm">Criar conta</button>
                     <RouterLink to="/" class="back-button">
-                       <span><-</span> Voltar para loja
+                        <span>←</span> Voltar para loja
                     </RouterLink>
                 </div>
                 <div class="login-container">
@@ -40,7 +40,7 @@ const toggleForm = () => {
                     <p>Acesse sua conta agora mesmo</p>
                     <button @click="toggleForm">Entrar</button>
                     <RouterLink to="/" class="back-button">
-                       <span><-</span> Voltar para loja
+                        <span>←</span> Voltar para loja
                     </RouterLink>
                 </div>
                 <div class="login-container">
@@ -69,7 +69,7 @@ main section .login {
 
 main section .register-container {
     width: 35%;
-    background-color: #27ae60;
+    background-color: #9400d8;
     padding: 10vw 5vw 0 5vw;
 }
 
@@ -87,7 +87,7 @@ main section .register-container p {
 }
 
 main section .register-container button {
-    background-color: #27ae60;
+    background-color: #9400d8;
     color: rgb(255, 255, 255);
     font-size: 1.2vw;
     font-weight: bold;
@@ -114,7 +114,7 @@ main section .login-container h1 {
     font-size: 2.5vw;
     font-weight: bold;
     line-height: 1;
-    color: #27ae60;
+    color: #9400d8;
 }
 
 main section .login-container p {
@@ -143,7 +143,7 @@ main section .login-container form input:focus {
 }
 
 main section .login-container form button {
-    background-color: #27ae60;
+    background-color: #9400d8;
     color: rgb(255, 255, 255);
     font-size: 1.2vw;
     font-weight: bold;
@@ -166,7 +166,7 @@ main section .login-container form button:hover {
     align-items: center;
     gap: 0.5rem;
     padding: 1rem 2rem;
-    background-color: #27AE60;
+    background-color: #9400d8;
     color: white;
     text-decoration: none;
     border-radius: 2px;
@@ -176,12 +176,12 @@ main section .login-container form button:hover {
     margin-top: 10vw;
 }
 
-.back-button span{
+.back-button span {
     transition: all ease-in-out .5s;
     padding-left: 1vw;
 }
 
-.back-button:hover span{
+.back-button:hover span {
     padding-left: 0;
 }
 </style>

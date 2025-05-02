@@ -68,7 +68,7 @@ main section .empty-cart p {
 }
 
 main section h1 {
-  color: #27ae60;
+  color: #008B8B;
   font-size: 2.5rem;
   margin-bottom: 2rem;
   font-weight: bold;
@@ -79,7 +79,7 @@ main section .cart-header {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 0;
-  border-bottom: 1px solid #27ae60;
+  border-bottom: 1px solid #008B8B;
 }
 
 main section .cart-header p {
@@ -92,6 +92,7 @@ main section .cart-favorites {
   list-style: none;
   padding: 0;
 }
+
 main section #total-favorites {
   text-align: right;
   margin-top: 2rem;
@@ -106,7 +107,7 @@ main section .cart-favorites li {
   grid-template-columns: 2fr 1fr 1fr;
   align-items: center;
   padding: 2rem 0;
-  border-bottom: 1px solid #27ae60;
+  border-bottom: 1px solid #008B8B;
 }
 
 main section .cart-favorites li .favorite-elements {
@@ -140,9 +141,9 @@ main section .favorite-details p span {
 }
 
 main section .buy-button {
-  background: #27ae60;
+  background: #008B8B;
   color: white;
-  border: 2px solid #27ae60;
+  border: 2px solid #008B8B;
   border-radius: 4px;
   font-size: 1.1rem;
   cursor: pointer;
@@ -152,28 +153,26 @@ main section .buy-button {
 }
 
 main section .buy-button:hover {
-  background: #1d8046;
-  border: 2px solid #1d8046;
+  background: #2a0640;
+  border: 2px solid #2a0640;
   color: white;
 }
 
 main section .back-button {
   display: inline-block;
   padding: 0.8rem 1.5rem;
-  border: 1px solid #27ae60;
-  color: #27ae60;
+  border: 1px solid #008B8B;
+  color: #008B8B;
   text-decoration: none;
   margin: 2rem 0;
   border-radius: 4px;
   transition: all .3s ease;
 }
 
-
-
 main section .checkout-button {
   width: 100%;
   padding: 1rem;
-  background: #27ae60;
+  background: #008B8B;
   color: white;
   border: none;
   border-radius: 4px;
@@ -197,13 +196,13 @@ main section .remove-button {
 }
 
 main section .remove-button:hover {
-  background: #1d8046;
-  border: 2px solid #1d8046;
+  background: #2a0640;
+  border: 2px solid #2a0640;
   color: white;
 }
 
 main section .back-button:hover {
-  background: #1d8046;
+  background: #2a0640;
   color: white;
 }
 </style>

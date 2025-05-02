@@ -11,9 +11,6 @@ import TwoOldWomen from '../components/img-books/Two_Old_Women.png'
 import CarrieSoto from '../components/img-books/Carrie_Soto_Is_Back.png'
 import BookLovers from '../components/img-books/Book_Lovers.png'
 import FirstSectionBook from '../components/img-home.vue/first-section-book.png'
-import TruckIcon from '../components/img-home.vue/truck-solid.svg'
-import StarIcon from '../components/img-home.vue/star-solid.svg'
-import BookIcon from '../components/img-home.vue/book-open-solid.svg'
 
 const router = useRouter()
 const cartStore = useCartStore()
@@ -121,19 +118,19 @@ const isFavorite = (livroId) => favorite.value.includes(livroId)
     <section id="benefict">
       <a href="#">
         <div>
-          <img :src="TruckIcon" alt="Caminhão">
+          <span class="mdi mdi-truck"></span>
           <h3>Frete grátis para SC</h3>
         </div>
       </a>
       <a href="#">
         <div>
-          <img :src="StarIcon" alt="Estrela">
+          <span class="mdi mdi-star"></span>
           <h3><a href="#">Livros recomendados</a></h3>
         </div>
       </a>
       <a href="#">
         <div id="last-benefict">
-          <img :src="BookIcon" alt="Livro">
+          <span class="mdi mdi-book-open-page-variant"></span>
           <h3><a href="#">Mais vendidos</a></h3>
         </div>
       </a>
@@ -147,12 +144,12 @@ const isFavorite = (livroId) => favorite.value.includes(livroId)
           <p>{{ livro.autor }}</p>
           <div id="space-div">
             <p>{{ livro.preco }}</p>
-            <span v-if="!isFavorite(livro.id)" class="fa-solid fa-heart" :style="{ color: '#27ae60' }"
+            <span v-if="!isFavorite(livro.id)" class="fa-solid fa-heart" :style="{ color: '#008B8B' }"
               @click="toggleFavorite(livro)"></span>
             <span v-else class="fa-solid fa-heart" :style="{ color: 'red' }" @click="toggleFavorite(livro)"></span>
           </div>
           <button @click="addToCart(livro)">
-            <span class="fa-solid fa-cart-shopping" style="color: #ffffff;"></span>
+            <span class="mdi mdi-cart"></span>
             Comprar
           </button>
         </li>
@@ -168,6 +165,7 @@ const isFavorite = (livroId) => favorite.value.includes(livroId)
 main#home {
   display: block;
   background-color: white;
+  padding-top: 20vh;
 }
 
 /*======================
@@ -186,17 +184,17 @@ main #offer #offer-text {
 
 main #offer #offer-text #autor-button {
   background-color: white;
-  border: 2px #27AE60 solid;
+  border: 2px #008B8B solid;
   border-radius: 2px;
-  color: #27AE60;
+  color: #008B8B;
   padding: 0.5vw 1vw 0.5vw 1vw;
   margin-bottom: 1vw;
   transition: all ease-in-out .5s;
 }
 
 main #offer #offer-text #autor-button:hover {
-  border: 2px #1d8046 solid;
-  color: #1d8046;
+  border: 2px #2a0640 solid;
+  color: #2a0640;
 }
 
 main #offer #offer-text h1 {
@@ -213,7 +211,7 @@ main #offer #offer-text p {
 }
 
 main #offer #offer-text #acessar-button {
-  background-color: #27AE60;
+  background-color: #008B8B;
   color: white;
   padding: 1vw 2vw 1vw 2vw;
   border: none;
@@ -223,7 +221,7 @@ main #offer #offer-text #acessar-button {
 }
 
 main #offer #offer-text #acessar-button:hover {
-  background-color: #1d8046;
+  background-color: #2a0640;
   color: white;
 }
 
@@ -234,8 +232,8 @@ main #benefict {
   display: flex;
   justify-content: space-between;
   padding: 2vw 10vw;
-  border-bottom: 2px #27AE60 solid;
-  border-top: 2px #27AE60 solid;
+  border-bottom: 2px #008B8B solid;
+  border-top: 2px #008B8B solid;
 }
 
 main #benefict div {
@@ -274,7 +272,7 @@ main #benefict a {
      SECTION #RELEASES
   ======================*/
 main #releases {
-  padding: 5vw 15vw 5vw 13vw;
+  padding: 5vw 8vw 5vw 10vw;
 }
 
 main #releases h2 {
@@ -291,7 +289,7 @@ main #releases ul {
 }
 
 main #releases ul li {
-  margin-right: 2vw;
+  margin-right: 1vw;
   margin-bottom: 5vw;
 }
 
@@ -325,7 +323,7 @@ main #releases ul li #space-div span {
 
 main #releases button {
   padding: 1vw 0;
-  background-color: #27AE60;
+  background-color: #008B8B;
   color: white;
   border: none;
   border-radius: 2px;
@@ -335,6 +333,6 @@ main #releases button {
 }
 
 main #releases button:hover {
-  background-color: #1d8046;
+  background-color: #2a0640;
 }
 </style>

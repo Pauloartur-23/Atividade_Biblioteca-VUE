@@ -1,31 +1,89 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+import { ref, onMounted, onUnmounted } from 'vue'
+
+const lastScrollTop = ref(0)
+const header = ref(null)
+
+const handleScroll = () => {
+  const currentScroll = window.pageYOffset || document.documentElement.scrollTop
+
+  if (currentScroll > lastScrollTop.value) {
+    header.value.style.transform = 'translateY(-100%)'
+  } else {
+    header.value.style.transform = 'translateY(0)'
+  }
+
+  lastScrollTop.value = currentScroll <= 0 ? 0 : currentScroll
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
 
 <template>
-  <header>
-    <div id="logo">
-      <p>IFbooks</p>
-      <p><span>Apreço a<br>
-        leitura</span></p>
+  <header ref="header">
+    <div id="header-content-top">
+      <p>Compre aqui livros novos, usados e seminovos de milhares de sebos e livrarias.</p>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Categorias</a></li>
+        <li><a href="#">Promoções</a></li>
+        <li><a href="#">Novidades</a></li>
+      </ul>
     </div>
-    <div id="search">
-      <input type="text" placeholder="Pesquisar" id="input-search">
-    <img id="image-search" src="../src/components/img-app.vue/magnifying-glass.svg" alt="Lupa">
+    <div id="header-content">
+      <div id="logo">
+        <p>IFbooks</p>
+        <p><span>Apreço a<br>
+            leitura</span></p>
+      </div>
+      <div id="search">
+        <input type="text" placeholder="Pesquisar" id="input-search">
+        <span class="mdi mdi-magnify"></span>
+      </div>
+      <div id="header-page-icons">
+        <RouterLink to="/like" style="text-decoration: none;">
+          <div id="div-link-icons">
+            <span class="mdi mdi-heart-outline"></span>
+            <p>Curtidas</p>
+          </div>
+        </RouterLink>
+        <RouterLink to="/login" style="text-decoration: none;">
+          <div id="div-link-icons">
+            <span class="mdi mdi-account-outline"></span>
+            <p>Entrar</p>
+          </div>
+        </RouterLink>
+        <RouterLink to="/carrinho" style="text-decoration: none;">
+          <div id="div-link-icons">
+            <span class="mdi mdi-cart-outline"></span>
+          </div>
+        </RouterLink>
+      </div>
     </div>
-    <nav>
-      <ul id="header-page-links">
+    <div id="header-page-links">
+
+      <ul id="header-page-links-links">
         <li><a href="#">Termos</a></li>
         <li><a href="#">Equipe</a></li>
         <li><a href="#">Envio</a></li>
         <li><a href="#">Devoluções</a></li>
+        <li><a href="#">Fale conosco</a></li>
+        <li><a href="#">Política de privacidade</a></li>
+        <li><a href="#">Política de cookies</a></li>
+        <li><a href="#">Política de privacidade</a></li>
       </ul>
-    </nav>
-      <RouterLink class="image-links" to="/carrinho"><img src="../src/components/img-app.vue/cart-shopping-solid.svg" alt="Carrinho"></RouterLink> 
-      <p class="divisao-links">|</p>
-      <RouterLink class="image-links" to="/like"><img src="../src/components/img-app.vue/heart-solid.svg" alt="Coração"></RouterLink> 
-      <p class="divisao-links">|</p>
-      <RouterLink class="image-links" to="/login"><img src="../src/components/img-app.vue/user-solid.svg" alt="User"></RouterLink>
+      <div id="header-page-links-location">
+        <span class="mdi mdi-map-marker-outline"></span>
+        <p>Sua localização</p>
+      </div>
+    </div>
   </header>
   <router-view></router-view>
   <footer>
@@ -41,9 +99,9 @@ import { RouterLink } from 'vue-router'
       <div id="div-contato-footer">
         <p>Contato</p>
         <ul>
-          <li><i class="fa-solid fa-phone" style="color: #ffffff;"></i> +55 47 40045263</li>
-          <li><i class="fa-solid fa-clock" style="color: #ffffff;"></i> 8h às 23h - Seg a Sex</li>
-          <li><i class="fa-solid fa-envelope" style="color: #ffffff;"></i> contato@ifbooks.com</li>
+          <li><span class="mdi mdi-phone"></span> +55 47 40045263</li>
+          <li><span class="mdi mdi-clock"></span> 8h às 23h - Seg a Sex</li>
+          <li><span class="mdi mdi-email"></span> contato@ifbooks.com</li>
         </ul>
         <div id="div-img-footer">
           <img src="../src/components/img-app.vue/paipal.png" alt="PaiPal">
