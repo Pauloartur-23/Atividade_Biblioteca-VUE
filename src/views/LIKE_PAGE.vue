@@ -8,8 +8,8 @@ const removeItemLike = (favoriteId) => {
 }
 
 const addToCart = (livro) => {
-  cartStore.addItem(livro)
-  router.push('/carrinho')
+  cartStore.addItem(livro);
+  router.push('/carrinho');
 }
 </script>
 
@@ -35,7 +35,7 @@ const addToCart = (livro) => {
                 <p>{{ favorite.autor }}</p>
                 <p><span>{{ favorite.preco }}</span></p>
                 <button class="buy-button" @click="addToCart(favorite)">
-                  <span class="fa-solid fa-cart-shopping" style="color: #ffffff;"></span>
+                  <span class="mdi mdi-cart" style="color: #ffffff;"></span>
                   Comprar
                 </button>
               </div>
