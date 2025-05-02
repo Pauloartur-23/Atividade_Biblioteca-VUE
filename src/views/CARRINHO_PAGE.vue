@@ -343,7 +343,7 @@ main #carrinho-code .checkout-button {
 
 main #carrinho-code .checkout-button:hover,
 main #carrinho-code .coupon-button:hover {
-  background: #2a0640;
+  background: #003f3f;
 }
 
 main #carrinho-code .remove-coupon-button:hover {
@@ -351,12 +351,12 @@ main #carrinho-code .remove-coupon-button:hover {
 }
 
 main #carrinho-code .back-button:hover {
-  background: #2a0640;
+  background: #003f3f;
   color: white;
 }
 
 main #carrinho-code .quantity-controls button:hover {
-  background: #2a0640;
+  background: #003f3f;
   color: white;
 }
 </style>

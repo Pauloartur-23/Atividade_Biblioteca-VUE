@@ -1,15 +1,17 @@
 <script setup>
 import { useCartStore } from '../stores/store'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 
+const router = useRouter()
 const cartStore = useCartStore()
+
 const removeItemLike = (favoriteId) => {
   cartStore.removeItemLike(favoriteId)
 }
 
 const addToCart = (livro) => {
-  cartStore.addItem(livro);
-  router.push('/carrinho');
+  cartStore.addItem(livro)
+  router.push('/carrinho')
 }
 </script>
 
@@ -35,7 +37,7 @@ const addToCart = (livro) => {
                 <p>{{ favorite.autor }}</p>
                 <p><span>{{ favorite.preco }}</span></p>
                 <button class="buy-button" @click="addToCart(favorite)">
-                  <span class="mdi mdi-cart" style="color: #ffffff;"></span>
+                  <span class="mdi mdi-cart"></span>
                   Comprar
                 </button>
               </div>
@@ -104,7 +106,6 @@ main section #total-favorites {
 main section .cart-favorites li {
   display: flex;
   justify-content: space-between;
-  grid-template-columns: 2fr 1fr 1fr;
   align-items: center;
   padding: 2rem 0;
   border-bottom: 1px solid #008B8B;
@@ -150,12 +151,14 @@ main section .buy-button {
   transition: all .3s ease;
   padding: 0.5rem 1rem;
   margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 main section .buy-button:hover {
-  background: #2a0640;
-  border: 2px solid #2a0640;
-  color: white;
+  background: #003f3f;
+  border: 2px solid #003f3f;
 }
 
 main section .back-button {
@@ -166,19 +169,6 @@ main section .back-button {
   text-decoration: none;
   margin: 2rem 0;
   border-radius: 4px;
-  transition: all .3s ease;
-}
-
-main section .checkout-button {
-  width: 100%;
-  padding: 1rem;
-  background: #008B8B;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  margin-top: 1.5rem;
   transition: all .3s ease;
 }
 
@@ -196,13 +186,13 @@ main section .remove-button {
 }
 
 main section .remove-button:hover {
-  background: #2a0640;
-  border: 2px solid #2a0640;
+  background: #003f3f;
+  border: 2px solid #003f3f;
   color: white;
 }
 
 main section .back-button:hover {
-  background: #2a0640;
+  background: #003f3f;
   color: white;
 }
 </style>

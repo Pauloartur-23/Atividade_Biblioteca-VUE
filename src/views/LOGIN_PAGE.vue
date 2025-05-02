@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 
-
 const isLogin = ref(true)
 
 const toggleForm = () => {
@@ -69,7 +68,7 @@ main section .login {
 
 main section .register-container {
     width: 35%;
-    background-color: #9400d8;
+    background-color: #008B8B;
     padding: 10vw 5vw 0 5vw;
 }
 
@@ -87,8 +86,8 @@ main section .register-container p {
 }
 
 main section .register-container button {
-    background-color: #9400d8;
-    color: rgb(255, 255, 255);
+    background-color: #008B8B;
+    color: white;
     font-size: 1.2vw;
     font-weight: bold;
     width: 100%;
@@ -100,8 +99,8 @@ main section .register-container button {
 }
 
 main section .register-container button:hover {
-    background-color: #1d8046;
-    border: 2px solid #1d8046;
+    background-color: #003f3f;
+    border: 2px solid #003f3f;
 }
 
 main section .login-container {
@@ -114,7 +113,7 @@ main section .login-container h1 {
     font-size: 2.5vw;
     font-weight: bold;
     line-height: 1;
-    color: #9400d8;
+    color: #008B8B;
 }
 
 main section .login-container p {
@@ -143,8 +142,8 @@ main section .login-container form input:focus {
 }
 
 main section .login-container form button {
-    background-color: #9400d8;
-    color: rgb(255, 255, 255);
+    background-color: #008B8B;
+    color: white;
     font-size: 1.2vw;
     font-weight: bold;
     width: 50%;
@@ -157,8 +156,8 @@ main section .login-container form button {
 }
 
 main section .login-container form button:hover {
-    background-color: #1d8046;
-    border: 2px solid #1d8046;
+    background-color: #003f3f;
+    border: 2px solid #003f3f;
 }
 
 .back-button {
@@ -166,7 +165,7 @@ main section .login-container form button:hover {
     align-items: center;
     gap: 0.5rem;
     padding: 1rem 2rem;
-    background-color: #9400d8;
+    background-color: #008B8B;
     color: white;
     text-decoration: none;
     border-radius: 2px;
