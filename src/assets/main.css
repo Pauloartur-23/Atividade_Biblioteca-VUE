@@ -19,7 +19,7 @@ header {
   width: 100%;
   background-color: #008B8B;
   transition: transform 0.3s ease-in-out;
-  border: 1px #003f3f solid;
+  border-bottom: 1px #003f3f72 solid;
 }
 
 header #header-content-top {
@@ -189,22 +189,19 @@ header #header-page-links-location span {
 }
 
 /*======================
-    SECTION #CARRINHO-CODE
-  ======================*/
-
-/*======================
           FOOTER
   ======================*/
 footer {
   background-color: #008B8B;
   padding: 2vw 0vw 1vw 0vw;
+  border-top: 1px #003f3f72 solid;
 }
 
 footer #space-footer {
   display: flex;
   justify-content: space-between;
   padding: 0vw 15vw 2vw 15vw;
-  border-bottom: 1px white solid;
+  border-bottom: 1px #003f3f72 solid;
 }
 
 footer #space-footer div ul {
@@ -246,5 +243,5 @@ footer #div-img-footer img {
 footer #copy {
   text-align: center;
   color: white;
-  padding: 1vw;
+  padding: 1vw 0 0 0;
 }

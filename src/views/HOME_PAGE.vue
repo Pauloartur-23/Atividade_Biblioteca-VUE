@@ -16,6 +16,8 @@ const cartStore = useCartStore()
 const favorite = ref([])
 const currentOfferSlide = ref(0)
 const autoPlayInterval = ref(null)
+const currentReleaseSlide = ref(0)
+const autoPlayReleaseInterval = ref(null)
 
 const livros = [
   {
@@ -106,12 +108,34 @@ const stopAutoPlay = () => {
   }
 }
 
+const nextReleaseSlide = () => {
+  currentReleaseSlide.value = (currentReleaseSlide.value + 1) % Math.ceil(livros.length / 4)
+}
+
+const prevReleaseSlide = () => {
+  currentReleaseSlide.value = (currentReleaseSlide.value - 1 + Math.ceil(livros.length / 4)) % Math.ceil(livros.length / 4)
+}
+
+const startAutoPlayRelease = () => {
+  stopAutoPlayRelease()
+  autoPlayReleaseInterval.value = setInterval(nextReleaseSlide, 5000)
+}
+
+const stopAutoPlayRelease = () => {
+  if (autoPlayReleaseInterval.value) {
+    clearInterval(autoPlayReleaseInterval.value)
+    autoPlayReleaseInterval.value = null
+  }
+}
+
 onMounted(() => {
   startAutoPlay()
+  startAutoPlayRelease()
 })
 
 onUnmounted(() => {
   stopAutoPlay()
+  stopAutoPlayRelease()
 })
 
 const addToCart = (livro) => {
@@ -198,24 +222,38 @@ const isFavorite = (livroId) => favorite.value.includes(livroId)
     </section>
     <section id="releases">
       <h2>Lançamentos</h2>
-      <ul>
-        <li v-for="livro in livros" :key="livro.id">
-          <img :src="livro.img" alt="Livro">
-          <h4>{{ livro.titulo }}</h4>
-          <p>{{ livro.autor }}</p>
-          <div id="space-div">
-            <p>{{ livro.preco }}</p>
-            <span v-if="!isFavorite(livro.id)" class="fa-solid fa-heart" :style="{ color: '#008B8B' }"
-              @click="toggleFavorite(livro)"></span>
-            <span v-else class="mdi mdi-heart" :style="{ color: 'red' }"
-              style="font-size: 1.5rem; margin: -0.5vw 0.5vw -0.5vw 0;" @click="toggleFavorite(livro)"></span>
+      <div class="releases-carousel-container">
+        <button class="carousel-control prev" @click="prevReleaseSlide">
+          <span class="mdi mdi-chevron-left"></span>
+        </button>
+        <div class="releases-carousel-wrapper">
+          <div class="releases-carousel" :style="{ transform: `translateX(-${currentReleaseSlide * 100}%)` }">
+            <div v-for="(group, index) in Math.ceil(livros.length / 4)" :key="index" class="releases-carousel-item">
+              <ul>
+                <li v-for="livro in livros.slice(index * 4, (index + 1) * 4)" :key="livro.id">
+                  <img :src="livro.img" :alt="livro.titulo">
+                  <h4>{{ livro.titulo }}</h4>
+                  <p>{{ livro.autor }}</p>
+                  <div class="space-div">
+                    <p>{{ livro.preco }}</p>
+                    <span v-if="!isFavorite(livro.id)" class="fa-solid fa-heart" :style="{ color: '#008B8B' }"
+                      @click="toggleFavorite(livro)"></span>
+                    <span v-else class="fa-solid fa-heart" style="transition: all ease-in-out .5s;" :style="{ color: 'red' }"
+                       @click="toggleFavorite(livro)"></span>
+                  </div>
+                  <button @click="addToCart(livro)">
+                    <span class="mdi mdi-cart"></span>
+                    Comprar
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
-          <button @click="addToCart(livro)">
-            <span class="mdi mdi-cart"></span>
-            Comprar
-          </button>
-        </li>
-      </ul>
+        </div>
+        <button class="carousel-control next" @click="nextReleaseSlide">
+          <span class="mdi mdi-chevron-right"></span>
+        </button>
+      </div>
     </section>
   </main>
 </template>
@@ -402,27 +440,29 @@ main #benefict {
   padding: 2vw 10vw;
   background-color: #008B8B;
   box-shadow: 0 0 2px 0 #000000;
-  border: 1px #003f3f solid;
+  border: 1px #003f3f72 solid;
 }
 
 main #benefict div {
   display: flex;
   background-color: #003f3f;
   padding: 0.2vw 2vw;
-  border-radius: 30px;
+  border-radius: 10px;
   color: white;
   transition: all ease-in-out .5s;
   border: 2px #003f3f solid;
+  width: 20vw;
+  justify-content: center;
 }
 
 main #benefict div span {
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 main #benefict div h3 {
-  margin-top: 1vw;
-  font-size: 1.5rem;
-  padding-left: 1vw;
+  margin-top: 0.5vw;
+  font-size: 1.2rem;
+  padding-left: 0.5vw;
   font-weight: bold;
   transition: all ease-in-out .5s;
 }
@@ -448,18 +488,56 @@ main #releases h2 {
   margin-bottom: 2vw;
 }
 
+main #releases .releases-carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+main #releases .releases-carousel-wrapper {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+}
+
+main #releases .releases-carousel {
+  display: flex;
+  width: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+main #releases .releases-carousel-item {
+  flex: 0 0 100%;
+  min-width: 100%;
+  padding: 0 2vw;
+  box-sizing: border-box;
+}
+
 main #releases ul {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 main #releases ul li {
-  margin-right: 1vw;
-  margin-bottom: 5vw;
+  margin-right: 2vw;
+  margin-bottom: 2vw;
+  display: flex;
+  flex-direction: column;
+}
+
+main #releases ul li img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  margin-bottom: 1vw;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 main #releases ul li h4 {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: #382C2C;
   font-weight: bold;
 }
@@ -468,36 +546,69 @@ main #releases ul li p {
   color: #4F4C57;
 }
 
-main #releases ul li #space-div {
+main #releases ul li .space-div {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1.5vw;
+  margin-bottom: 1vw;
 }
 
-main #releases ul li #space-div p {
+main #releases ul li .space-div p {
   font-weight: bold;
   color: #382C2C;
 }
 
-main #releases ul li #space-div span {
-  margin-right: 0.5vw;
+main #releases ul li .space-div span {
   font-size: 1.2rem;
   cursor: pointer;
   transition: all ease-in-out .3s;
 }
 
-main #releases button {
-  padding: 1vw 0;
+main #releases ul li button {
+  padding: 1vw 2vw;
   background-color: #008B8B;
   color: white;
   border: none;
   border-radius: 2px;
-  width: 100%;
   font-size: 1.1rem;
   transition: all ease-in-out .5s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5vw;
 }
 
-main #releases button:hover {
+main #releases ul li button:hover {
+  background-color: #003f3f;
+}
+
+main #releases .carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 139, 139, 0.7);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease;
+  z-index: 10;
+}
+
+main #releases .carousel-control.prev {
+  left: 0;
+}
+
+main #releases .carousel-control.next {
+  right: 0;
+}
+
+main #releases .carousel-control:hover {
   background-color: #003f3f;
 }
 </style>
