@@ -60,6 +60,7 @@ const toggleForm = () => {
 <style scoped>
 main section {
     background-color: white;
+    padding-top: 10vw;
 }
 
 main section .login {
@@ -68,6 +69,7 @@ main section .login {
 
 main section .register-container {
     width: 35%;
+    height: 100%;
     background-color: #008B8B;
     padding: 10vw 5vw 0 5vw;
 }

@@ -113,7 +113,7 @@ const removeCoupon = () => {
 
 <style scoped>
 main {
-  padding: 5vw 15vw;
+  padding: 15vw 15vw 5vw 15vw;
   margin: 0 auto;
   background-color: white;
 }
@@ -201,7 +201,7 @@ main #carrinho-code .quantity-controls-buttons {
   display: flex;
   align-items: center;
   gap: 1rem;
-  border: 1px solid #008B8B;
+  border: 1px solid #4F4C57;
   border-radius: 4px;
 }
 
@@ -210,7 +210,7 @@ main #carrinho-code .quantity-controls button {
   height: 60px;
   border: none;
   background: white;
-  color: #008B8B;
+  color: #4F4C57;
   font-size: 1.2rem;
   cursor: pointer;
   display: flex;
@@ -221,7 +221,7 @@ main #carrinho-code .quantity-controls button {
 }
 
 main #carrinho-code .quantity-controls p {
-  color: #008B8B;
+  color: #4F4C57;
   margin: 0;
   font-size: 1.1rem;
   min-width: 20px;
@@ -296,12 +296,12 @@ main #carrinho-code .remove-coupon-button {
 main #carrinho-code .total-section {
   padding: 2rem;
   border-radius: 4px;
-  border: 1px solid #008B8B;
+  border: 1px solid #382C2C;
 }
 
 main #carrinho-code .total-section h2 {
   margin-bottom: 1.5rem;
-  color: #008B8B;
+  color: #382C2C;
   font-weight: bold;
   font-size: 1.5rem;
 }
@@ -316,13 +316,13 @@ main #carrinho-code .total-section li {
   justify-content: space-between;
   padding-bottom: 1vw;
   padding-top: 1vw;
-  color: #008B8B;
-  border-bottom: 1px solid #008B8B;
+  color: #4F4C57;
+  border-bottom: 1px solid #4F4C57;
 }
 
 main #carrinho-code .total-section li.total {
   font-weight: bold;
-  color: #008B8B;
+  color: #4F4C57;
   padding-top: 1rem;
   margin-top: 1rem;
   border-bottom: none;

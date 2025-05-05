@@ -54,7 +54,7 @@ const addToCart = (livro) => {
 
 <style scoped>
 main {
-  padding: 5vw 15vw;
+  padding: 15vw 15vw 5vw 15vw;
   margin: 0 auto;
   background-color: white;
 }

@@ -170,7 +170,7 @@ const isFavorite = (livroId) => favorite.value.includes(livroId)
       <div class="offer-carousel-container">
         <div class="offer-carousel-wrapper">
           <div class="offer-carousel" :style="{ transform: `translateX(-${currentOfferSlide * 100}%)` }">
-            <div v-for="(livro, index) in offerSlides" :key="livro.id" class="offer-carousel-item">
+            <div v-for="(livro) in offerSlides" :key="livro.id" class="offer-carousel-item">
               <div class="offer-content">
                 <button class="destaques-button">Destaques de Abril</button>
                 <h1>{{ livro.titulo }}</h1>
@@ -265,14 +265,13 @@ const isFavorite = (livroId) => favorite.value.includes(livroId)
 main#home {
   display: block;
   background-color: white;
-  padding-top: 20vh;
 }
 
 /*======================
       SECTION #OFFER
   ======================*/
 main #offer {
-  padding: 2vw 5vw;
+  padding: 12vw 5vw 2vw 5vw;
   position: relative;
 }
 
@@ -292,7 +291,7 @@ main #offer .offer-carousel-wrapper {
 main #offer .offer-carousel {
   display: flex;
   width: 100%;
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.4s ease-in-out;
 }
 
 main #offer .offer-carousel-item {
@@ -315,7 +314,7 @@ main #offer .destaques-button {
   color: #008B8B;
   padding: 0.5vw 1vw;
   margin-bottom: 1vw;
-  transition: all ease-in-out .5s;
+  transition: trasform 0.4s ease-in-out;
 }
 
 main #offer .destaques-button:hover {
