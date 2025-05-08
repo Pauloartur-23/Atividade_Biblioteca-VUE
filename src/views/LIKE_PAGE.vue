@@ -80,7 +80,7 @@ main section .cart-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 0;
+  padding: 1vw 0;
   border-bottom: 1px solid #008B8B;
 }
 

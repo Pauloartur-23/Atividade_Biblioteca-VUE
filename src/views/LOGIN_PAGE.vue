@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
 
 const isLogin = ref(true)
 
@@ -14,44 +13,27 @@ const toggleForm = () => {
     <main>
         <section>
             <div class="login" v-if="isLogin">
-                <div class="register-container">
-                    <h2>Ainda não tem uma conta?</h2>
-                    <p>Crie uma conta agora mesmo</p>
-                    <button @click="toggleForm">Criar conta</button>
-                    <RouterLink to="/" class="back-button">
-                        <span>←</span> Voltar para loja
-                    </RouterLink>
-                </div>
-                <div class="login-container">
-                    <h1>Entre com sua conta</h1>
-                    <p>Preencha os campos abaixo para entrar na sua conta</p>
-                    <form>
+                <h1>Entre com sua conta</h1>
+                <p>Preencha os campos abaixo para entrar na sua conta</p>
+                <form>
+                    <div class="div-input-name">
                         <input type="text" placeholder="Nome">
-                        <input type="email" placeholder="Email">
-                        <input type="password" placeholder="Password">
-                        <button type="submit">Login</button>
-                    </form>
-                </div>
+                        <input type="text" placeholder="Sobrenome">
+                    </div>
+                    <input type="email" placeholder="Email">
+                    <input type="password" placeholder="Password">
+                    <button type="submit">Login</button>
+                </form>
             </div>
             <div class="login" v-else>
-                <div class="register-container">
-                    <h2>Bem-vindo de volta!</h2>
-                    <p>Acesse sua conta agora mesmo</p>
-                    <button @click="toggleForm">Entrar</button>
-                    <RouterLink to="/" class="back-button">
-                        <span>←</span> Voltar para loja
-                    </RouterLink>
-                </div>
-                <div class="login-container">
-                    <h1>Crie sua conta</h1>
-                    <p>Preencha os campos abaixo para criar sua conta</p>
-                    <form>
-                        <input type="text" placeholder="Nome">
-                        <input type="email" placeholder="Email">
-                        <input type="password" placeholder="Password">
-                        <button type="submit" @click="toggleForm">Criar conta</button>
-                    </form>
-                </div>
+                <h1>Crie sua conta</h1>
+                <p>Preencha os campos abaixo para criar sua conta</p>
+                <form>
+                    <input type="text" placeholder="Nome">
+                    <input type="email" placeholder="Email">
+                    <input type="password" placeholder="Password">
+                    <button type="submit" @click="toggleForm">Criar conta</button>
+                </form>
             </div>
         </section>
     </main>
@@ -62,87 +44,52 @@ main section {
     background-color: white;
 }
 
-main section .login {
-    display: flex;
+main section {
+    padding: 20vw 25vw 5VW 25vw;
 }
 
-main section .register-container {
-    width: 35%;
-    height: 100%;
-    background-color: #008B8B;
-    padding: 20vw 5vw 5VW 5vw;
-}
-
-main section .register-container h2 {
-    color: white;
+main section h1 {
+    color: #008B8B;
     font-size: 2.5vw;
     font-weight: bold;
     line-height: 1;
-}
-
-main section .register-container p {
-    color: white;
-    font-size: 1.2vw;
-    margin: 2vw 0;
-}
-
-main section .register-container button {
-    background-color: #008B8B;
-    color: white;
-    font-size: 1.2vw;
-    font-weight: bold;
-    width: 100%;
-    padding: 1vw 2vw;
-    border-radius: 4px;
-    border: 2px solid white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-main section .register-container button:hover {
-    background-color: #003f3f;
-    border: 2px solid #003f3f;
-}
-
-main section .login-container {
-    width: 65%;
-    padding: 18vw 5vw 0 5vw;
     text-align: center;
 }
 
-main section .login-container h1 {
-    font-size: 2.5vw;
-    font-weight: bold;
-    line-height: 1;
-    color: #008B8B;
-}
-
-main section .login-container p {
+main section p {
     font-size: 0.8rem;
-    margin-bottom: 2vw;
+    margin-bottom: 1.5vw;
     color: #4F4C57;
+    padding-bottom: 2vw;
+    border-bottom: 1px #008B8B solid;
+    text-align: center;
 }
 
-main section .login-container form {
+main section form {
     display: flex;
     flex-direction: column;
     gap: 1vw;
 }
 
-main section .login-container form input {
-    padding: 1vw 2vw;
+main section form input {
+    padding: 0.5vw 1vw;
     border-radius: 4px;
     background-color: #F1F1F1;
-    border: none;
-    font-size: 1.2vw;
+    border: 1px #4F4C57 solid;
+    font-size: 1.2rem;
     transition: all 0.3s ease;
 }
 
-main section .login-container form input:focus {
+main section form input:focus {
     outline: none;
 }
 
-main section .login-container form button {
+main section form .div-input-name input{
+    
+}
+
+
+main section form button {
     background-color: #008B8B;
     color: white;
     font-size: 1.2vw;
@@ -156,32 +103,8 @@ main section .login-container form button {
     transition: all 0.3s ease;
 }
 
-main section .login-container form button:hover {
+main section form button:hover {
     background-color: #003f3f;
     border: 2px solid #003f3f;
-}
-
-.back-button {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem 2rem;
-    background-color: #008B8B;
-    color: white;
-    text-decoration: none;
-    border-radius: 2px;
-    margin-top: 1rem;
-    transition: all ease-in-out .5s;
-    border: none;
-    margin-top: 10vw;
-}
-
-.back-button span {
-    transition: all ease-in-out .5s;
-    padding-left: 1vw;
-}
-
-.back-button:hover span {
-    padding-left: 0;
 }
 </style>
