@@ -13,25 +13,29 @@ const addToCart = (livro) => {
   cartStore.addItem(livro)
   router.push('/carrinho')
 }
+
 </script>
 
 <template>
   <main id="like">
     <section>
       <h1>Curtidos</h1>
+
       <div v-if="cartStore.favorites.length === 0" class="empty-cart">
         <p>Não tem nenhum livro curtido</p>
         <RouterLink to="/" class="back-button">Voltar para loja</RouterLink>
       </div>
+
       <template v-else>
         <div class="cart-header">
           <p>Título</p>
           <p>Remover</p>
         </div>
+
         <ul class="cart-favorites">
           <li v-for="favorite in cartStore.favorites" :key="favorite.id">
             <div class="favorite-elements">
-              <img :src="favorite.img" :alt="favorite.titulo">
+              <img :src="favorite.img" :alt="favorite.titulo" />
               <div class="favorite-details">
                 <h2>{{ favorite.titulo }}</h2>
                 <p>{{ favorite.autor }}</p>
@@ -42,10 +46,17 @@ const addToCart = (livro) => {
                 </button>
               </div>
             </div>
-            <button class="remove-button" @click="removeItemLike(favorite.id)">X</button>
+            <button class="remove-button" @click="removeItemLike(favorite.id)">
+              <span class="mdi mdi-heart" :class="{'mdi-heart-outline': !favorite.isFavorite, 'mdi-heart': favorite.isFavorite}" />
+              Remover
+            </button>
           </li>
         </ul>
-        <p id="total-favorites">Total de livros curtidos: {{ cartStore.favorites.length }}</p>
+
+        <p id="total-favorites">
+          Total de livros curtidos: {{ cartStore.favorites.length }}
+        </p>
+
         <RouterLink to="/" class="back-button">Voltar para loja</RouterLink>
       </template>
     </section>

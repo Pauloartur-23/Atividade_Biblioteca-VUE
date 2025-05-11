@@ -1,8 +1,15 @@
 <script setup>
 import { useCartStore } from '../stores/store'
 import { RouterLink } from 'vue-router'
+import { ref } from 'vue'
 
 const cartStore = useCartStore()
+const couponCode = ref('')
+
+const validCoupons = {
+  'Kennedy10': 0.10,
+  'Eduardo20': 0.20
+}
 
 const formatPrice = (price) => {
   return `R$${parseFloat(price).toFixed(2)}`
@@ -17,24 +24,20 @@ const updateQuantity = (itemId, newQuantity) => {
 }
 
 const calculateSubtotal = (item) => {
-  const price = parseFloat(item.preco.replace('R$', ''))
+  const price = parseFloat(item.preco.replace('R$', '').replace(',', '.'))
   return formatPrice(price * item.quantity)
 }
 
 const applyCoupon = () => {
-  const couponInput = document.querySelector('.coupon-section input')
-  const couponCode = couponInput.value.trim()
-
-  if (couponCode === 'Kennedy10') {
-    cartStore.applyCoupon(couponCode)
-  } else if (couponCode === 'Eduardo20') {
-    cartStore.applyCoupon(couponCode)
+  const code = couponCode.value.trim()
+  if (validCoupons[code]) {
+    cartStore.applyCoupon(code)
   }
 }
 
 const removeCoupon = () => {
   cartStore.removeCoupon()
-  document.querySelector('.coupon-section input').value = ''
+  couponCode.value = ''
 }
 </script>
 
@@ -75,7 +78,7 @@ const removeCoupon = () => {
         <RouterLink to="/" class="back-button">Voltar para loja</RouterLink>
         <div class="cart-footer">
           <div class="coupon-section">
-            <input type="text" placeholder="Código do cupom" :disabled="cartStore.discount > 0">
+           <input v-model="couponCode" type="text" placeholder="Código do cupom" :disabled="cartStore.discount > 0">
             <button v-if="!cartStore.discount" @click="applyCoupon" class="coupon-button">
               Inserir Cupom
             </button>

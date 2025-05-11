@@ -14,10 +14,17 @@ import BookLovers from '../components/img-books/Book_Lovers.png'
 const router = useRouter()
 const cartStore = useCartStore()
 const favorite = ref([])
-const currentOfferSlide = ref(0)
-const autoPlayInterval = ref(null)
-const currentReleaseSlide = ref(0)
-const autoPlayReleaseInterval = ref(null)
+
+const loadFavorites = () => {
+  const storedFavorites = localStorage.getItem('favorites')
+  if (storedFavorites) {
+    favorite.value = JSON.parse(storedFavorites)
+  }
+}
+
+const saveFavorites = () => {
+  localStorage.setItem('favorites', JSON.stringify(favorite.value))
+}
 
 const livros = [
   {
@@ -32,62 +39,63 @@ const livros = [
     img: ChainOfThorns,
     titulo: 'Chain of Thorns',
     autor: 'Cassandra Clare',
-    preco: 'R$23.24',
+    preco: 'R$25.50',
     id: '2',
-    resumo: 'O último livro da trilogia The Last Hours, onde os Shadowhunters lutam contra forças sombrias para salvar seu mundo.'
+    resumo: 'Último livro da série, onde segredos serão revelados e os personagens enfrentam seus maiores desafios.'
   },
   {
     img: CityOfFallenAngels,
     titulo: 'City of Fallen Angels',
     autor: 'Cassandra Clare',
-    preco: 'R$13.94',
+    preco: 'R$21.70',
     id: '3',
-    resumo: 'Quarto livro da série The Mortal Instruments, onde Clary e Jace enfrentam novos desafios em sua jornada de amor e aventura.'
+    resumo: 'Uma nova ameaça surge em Nova York, e os caçadores de sombras devem enfrentar um inimigo poderoso.'
   },
   {
     img: NonaTheNinth,
     titulo: 'Nona the Ninth',
-    autor: 'Cassandra Clare',
-    preco: 'R$16.84',
+    autor: 'Tamsyn Muir',
+    preco: 'R$27.30',
     id: '4',
-    resumo: 'Uma história de mistério e magia, onde Nona deve desvendar segredos antigos para salvar seu mundo.'
+    resumo: 'A história de Nona, uma jovem que deve enfrentar desafios para descobrir os segredos do universo.'
   },
   {
     img: HarlemShuffle,
     titulo: 'Harlem Shuffle',
-    autor: 'Cassandra Clare',
-    preco: 'R$26.92',
+    autor: 'Colson Whitehead',
+    preco: 'R$33.90',
     id: '5',
-    resumo: 'Uma história envolvente sobre família, crime e redenção no Harlem dos anos 1960.'
+    resumo: 'Uma narrativa emocionante sobre crime e ambição no Harlem dos anos 60.'
   },
   {
     img: TwoOldWomen,
     titulo: 'Two Old Women',
     autor: 'Velma Wallis',
-    preco: 'R$13.95',
+    preco: 'R$19.99',
     id: '6',
-    resumo: 'Uma história inspiradora sobre duas mulheres idosas que desafiam as expectativas e encontram força na adversidade.'
+    resumo: 'Duas mulheres idosas se enfrentam à natureza selvagem e à luta pela sobrevivência.'
   },
   {
     img: CarrieSoto,
     titulo: 'Carrie Soto Is Back',
     autor: 'Taylor Jenkins Reid',
-    preco: 'R$26.04',
+    preco: 'R$29.50',
     id: '7',
-    resumo: 'A história de uma ex-campeã de tênis que volta às quadras para provar que ainda tem o que é preciso para vencer.'
+    resumo: 'Carrie Soto retorna ao circuito de tênis após um longo período afastada, em busca da vitória.'
   },
   {
     img: BookLovers,
     titulo: 'Book Lovers',
     autor: 'Emily Henry',
-    preco: 'R$15.81',
+    preco: 'R$27.50',
     id: '8',
-    resumo: 'Uma história romântica sobre duas pessoas que descobrem o amor através de sua paixão compartilhada por livros.'
+    resumo: 'Uma história encantadora sobre amor, livros e a busca pelo que realmente importa na vida.'
   }
 ]
 
 const offerSlides = ref(livros)
 
+const currentOfferSlide = ref(0)
 const nextOfferSlide = () => {
   currentOfferSlide.value = (currentOfferSlide.value + 1) % offerSlides.value.length
 }
@@ -96,17 +104,39 @@ const prevOfferSlide = () => {
   currentOfferSlide.value = (currentOfferSlide.value - 1 + offerSlides.value.length) % offerSlides.value.length
 }
 
+const autoPlayInterval = ref(null)
 const startAutoPlay = () => {
   stopAutoPlay()
   autoPlayInterval.value = setInterval(nextOfferSlide, 5000)
 }
-
 const stopAutoPlay = () => {
   if (autoPlayInterval.value) {
     clearInterval(autoPlayInterval.value)
     autoPlayInterval.value = null
   }
 }
+
+const toggleFavorite = (favoriteId) => {
+  cartStore.toggleFavorite(favoriteId)
+}
+
+const addItemLike = (livro) => {
+  cartStore.addItemLike(livro)
+}
+
+const isFavorite = (id) => cartStore.favorites.includes(id)
+
+
+onMounted(() => {
+  loadFavorites()
+  startAutoPlay()
+})
+
+onUnmounted(() => {
+  stopAutoPlay()
+})
+
+const currentReleaseSlide = ref(0)
 
 const nextReleaseSlide = () => {
   currentReleaseSlide.value = (currentReleaseSlide.value + 1) % Math.ceil(livros.length / 4)
@@ -116,11 +146,7 @@ const prevReleaseSlide = () => {
   currentReleaseSlide.value = (currentReleaseSlide.value - 1 + Math.ceil(livros.length / 4)) % Math.ceil(livros.length / 4)
 }
 
-const startAutoPlayRelease = () => {
-  stopAutoPlayRelease()
-  autoPlayReleaseInterval.value = setInterval(nextReleaseSlide, 5000)
-}
-
+const autoPlayReleaseInterval = ref(null)
 const stopAutoPlayRelease = () => {
   if (autoPlayReleaseInterval.value) {
     clearInterval(autoPlayReleaseInterval.value)
@@ -129,39 +155,8 @@ const stopAutoPlayRelease = () => {
 }
 
 onMounted(() => {
-  startAutoPlay()
-  startAutoPlayRelease()
-})
-
-onUnmounted(() => {
-  stopAutoPlay()
   stopAutoPlayRelease()
 })
-
-const addToCart = (livro) => {
-  const livroParaCarrinho = {
-    id: livro.id,
-    titulo: livro.titulo,
-    autor: livro.autor,
-    preco: livro.preco,
-    img: livro.img,
-    quantity: 1
-  }
-  cartStore.addItem(livroParaCarrinho)
-  router.push('/carrinho')
-}
-
-const toggleFavorite = (livro) => {
-  if (favorite.value.includes(livro.id)) {
-    favorite.value = favorite.value.filter(id => id !== livro.id)
-    cartStore.removeItemLike(livro.id)
-  } else {
-    favorite.value.push(livro.id)
-    cartStore.addItemLike(livro)
-  }
-}
-
-const isFavorite = (livroId) => favorite.value.includes(livroId)
 </script>
 
 <template>
@@ -221,40 +216,40 @@ const isFavorite = (livroId) => favorite.value.includes(livroId)
       </a>
     </section>
     <section id="releases">
-      <h2>Lançamentos</h2>
-      <div class="releases-carousel-container">
-        <button class="carousel-control prev" @click="prevReleaseSlide">
-          <span class="mdi mdi-chevron-left"></span>
-        </button>
-        <div class="releases-carousel-wrapper">
-          <div class="releases-carousel" :style="{ transform: `translateX(-${currentReleaseSlide * 100}%)` }">
-            <div v-for="(group, index) in Math.ceil(livros.length / 4)" :key="index" class="releases-carousel-item">
-              <ul>
-                <li v-for="livro in livros.slice(index * 4, (index + 1) * 4)" :key="livro.id">
-                  <img :src="livro.img" :alt="livro.titulo">
-                  <h4>{{ livro.titulo }}</h4>
-                  <p>{{ livro.autor }}</p>
-                  <div class="space-div">
-                    <p>{{ livro.preco }}</p>
-                    <span v-if="!isFavorite(livro.id)" class="fa-solid fa-heart" :style="{ color: '#008B8B' }"
-                      @click="toggleFavorite(livro)"></span>
-                    <span v-else class="fa-solid fa-heart" style="transition: all ease-in-out .5s;" :style="{ color: 'red' }"
-                       @click="toggleFavorite(livro)"></span>
-                  </div>
-                  <button @click="addToCart(livro)">
-                    <span class="mdi mdi-cart"></span>
-                    Comprar
-                  </button>
-                </li>
-              </ul>
-            </div>
+    <h2>Lançamentos</h2>
+    <div class="releases-carousel-container">
+      <button class="carousel-control prev" @click="prevReleaseSlide">
+        <span class="mdi mdi-chevron-left"></span>
+      </button>
+      <div class="releases-carousel-wrapper">
+        <div class="releases-carousel" :style="{ transform: `translateX(-${currentReleaseSlide * 100}%)` }">
+          <div class="releases-carousel-item" v-for="(group, index) in Math.ceil(livros.length / 4)" :key="index">
+            <ul>
+              <li v-for="livro in livros.slice(index * 4, (index + 1) * 4)" :key="livro.id">
+                <img :src="livro.img" :alt="livro.titulo">
+                <h4>{{ livro.titulo }}</h4>
+                <p>{{ livro.autor }}</p>
+                <div class="space-div">
+                  <p>{{ livro.preco }}</p>
+                  <span v-if="!isFavorite(livro.id)" class="fa-solid fa-heart" :style="{ color: '#008B8B' }"
+                    @click="addItemLike(livro)"></span>
+                  <span v-else class="fa-solid fa-heart" style="transition: all ease-in-out .5s;" :style="{ color: 'red' }"
+                    @click="addItemLike(livro)"></span>
+                </div>
+                <button @click="addToCart(livro)">
+                  <span class="mdi mdi-cart"></span>
+                  Comprar
+                </button>
+              </li>
+            </ul>
           </div>
         </div>
-        <button class="carousel-control next" @click="nextReleaseSlide">
-          <span class="mdi mdi-chevron-right"></span>
-        </button>
       </div>
-    </section>
+      <button class="carousel-control next" @click="nextReleaseSlide">
+        <span class="mdi mdi-chevron-right"></span>
+      </button>
+    </div>
+  </section>
   </main>
 </template>
 

@@ -1,21 +1,22 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { ref, onMounted, onUnmounted } from 'vue'
+import throttle from 'lodash.throttle'
 
-const lastScrollTop = ref(0)
 const header = ref(null)
+const lastScrollTop = ref(0)
 
-const handleScroll = () => {
+const handleScroll = throttle(() => {
   const currentScroll = window.pageYOffset || document.documentElement.scrollTop
 
   if (currentScroll > lastScrollTop.value) {
-    header.value.style.transform = 'translateY(-100%)'
+    header.value?.classList.add('hidden')
   } else {
-    header.value.style.transform = 'translateY(0)'
+    header.value?.classList.remove('hidden')
   }
 
-  lastScrollTop.value = currentScroll <= 0 ? 0 : currentScroll
-}
+  lastScrollTop.value = Math.max(currentScroll, 0)
+}, 200)
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
@@ -115,4 +116,11 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+header {
+  transition: transform 0.3s ease;
+}
+
+.hidden {
+  transform: translateY(-100%);
+}
 </style>
