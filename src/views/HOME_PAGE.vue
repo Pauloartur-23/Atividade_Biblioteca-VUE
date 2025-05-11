@@ -39,57 +39,57 @@ const livros = [
     img: ChainOfThorns,
     titulo: 'Chain of Thorns',
     autor: 'Cassandra Clare',
-    preco: 'R$25.50',
+    preco: 'R$23.24',
     id: '2',
-    resumo: 'Último livro da série, onde segredos serão revelados e os personagens enfrentam seus maiores desafios.'
+    resumo: 'O último livro da trilogia The Last Hours, onde os Shadowhunters lutam contra forças sombrias para salvar seu mundo.'
   },
   {
     img: CityOfFallenAngels,
     titulo: 'City of Fallen Angels',
     autor: 'Cassandra Clare',
-    preco: 'R$21.70',
+    preco: 'R$13.94',
     id: '3',
-    resumo: 'Uma nova ameaça surge em Nova York, e os caçadores de sombras devem enfrentar um inimigo poderoso.'
+    resumo: 'Quarto livro da série The Mortal Instruments, onde Clary e Jace enfrentam novos desafios em sua jornada de amor e aventura.'
   },
   {
     img: NonaTheNinth,
     titulo: 'Nona the Ninth',
-    autor: 'Tamsyn Muir',
-    preco: 'R$27.30',
+    autor: 'Cassandra Clare',
+    preco: 'R$16.84',
     id: '4',
-    resumo: 'A história de Nona, uma jovem que deve enfrentar desafios para descobrir os segredos do universo.'
+    resumo: 'Uma história de mistério e magia, onde Nona deve desvendar segredos antigos para salvar seu mundo.'
   },
   {
     img: HarlemShuffle,
     titulo: 'Harlem Shuffle',
-    autor: 'Colson Whitehead',
-    preco: 'R$33.90',
+    autor: 'Cassandra Clare',
+    preco: 'R$26.92',
     id: '5',
-    resumo: 'Uma narrativa emocionante sobre crime e ambição no Harlem dos anos 60.'
+    resumo: 'Uma história envolvente sobre família, crime e redenção no Harlem dos anos 1960.'
   },
   {
     img: TwoOldWomen,
     titulo: 'Two Old Women',
     autor: 'Velma Wallis',
-    preco: 'R$19.99',
+    preco: 'R$13.95',
     id: '6',
-    resumo: 'Duas mulheres idosas se enfrentam à natureza selvagem e à luta pela sobrevivência.'
+    resumo: 'Uma história inspiradora sobre duas mulheres idosas que desafiam as expectativas e encontram força na adversidade.'
   },
   {
     img: CarrieSoto,
     titulo: 'Carrie Soto Is Back',
     autor: 'Taylor Jenkins Reid',
-    preco: 'R$29.50',
+    preco: 'R$26.04',
     id: '7',
-    resumo: 'Carrie Soto retorna ao circuito de tênis após um longo período afastada, em busca da vitória.'
+    resumo: 'A história de uma ex-campeã de tênis que volta às quadras para provar que ainda tem o que é preciso para vencer.'
   },
   {
     img: BookLovers,
     titulo: 'Book Lovers',
     autor: 'Emily Henry',
-    preco: 'R$27.50',
+    preco: 'R$15.81',
     id: '8',
-    resumo: 'Uma história encantadora sobre amor, livros e a busca pelo que realmente importa na vida.'
+    resumo: 'Uma história romântica sobre duas pessoas que descobrem o amor através de sua paixão compartilhada por livros.'
   }
 ]
 
@@ -116,16 +116,9 @@ const stopAutoPlay = () => {
   }
 }
 
-const toggleFavorite = (favoriteId) => {
-  cartStore.toggleFavorite(favoriteId)
-}
-
 const addItemLike = (livro) => {
   cartStore.addItemLike(livro)
 }
-
-const isFavorite = (id) => cartStore.favorites.includes(id)
-
 
 onMounted(() => {
   loadFavorites()
@@ -157,6 +150,19 @@ const stopAutoPlayRelease = () => {
 onMounted(() => {
   stopAutoPlayRelease()
 })
+
+const addToCart = (livro) => {
+  const livroParaCarrinho = {
+    id: livro.id,
+    titulo: livro.titulo,
+    autor: livro.autor,
+    preco: livro.preco,
+    img: livro.img,
+    quantity: 1
+  }
+  cartStore.addItem(livroParaCarrinho)
+  router.push('/carrinho')
+}
 </script>
 
 <template>
@@ -231,9 +237,7 @@ onMounted(() => {
                 <p>{{ livro.autor }}</p>
                 <div class="space-div">
                   <p>{{ livro.preco }}</p>
-                  <span v-if="!isFavorite(livro.id)" class="fa-solid fa-heart" :style="{ color: '#008B8B' }"
-                    @click="addItemLike(livro)"></span>
-                  <span v-else class="fa-solid fa-heart" style="transition: all ease-in-out .5s;" :style="{ color: 'red' }"
+                  <span class="fa-solid fa-heart" :style="{ color: livro.isFavorite ?  'red' : '#008B8B' }"
                     @click="addItemLike(livro)"></span>
                 </div>
                 <button @click="addToCart(livro)">

@@ -62,18 +62,13 @@ export const useCartStore = defineStore('cart', {
       const exists = this.favorites.find(fav => fav.id === livro.id)
       if (!exists) {
         this.favorites.push({ ...livro, isFavorite: true })
+      } else {
+        item.isFavorite = !item.isFavorite
       }
     },
 
     removeItemLike(favoriteId) {
       this.favorites = this.favorites.filter(fav => fav.id !== favoriteId)
     },
-
-    toggleFavorite(favoriteId) {
-      const item = this.favorites.find(fav => fav.id === favoriteId)
-      if (item) {
-        item.isFavorite = !item.isFavorite
-      }
-    }
   }
 })
