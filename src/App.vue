@@ -79,12 +79,10 @@ onUnmounted(() => {
         <li><a href="#">Política de privacidade</a></li>
         <li><a href="#">Política de cookies</a></li>
         <li><a href="#">Política de privacidade</a></li>
-      </ul>
       <div id="header-page-links-location">
         <span class="mdi mdi-map-marker-outline"></span>
         <p>Sua localização</p>
       </div>
-    </div>
   </header>
   <router-view></router-view>
   <footer>
@@ -92,9 +90,9 @@ onUnmounted(() => {
       <div id="div-ifbooks-footer">
         <p>IFbooks</p>
         <ul>
-          <li><a href="#"><span class="fa-brands fa-square-facebook" style="color: #ffffff;"></span></a></li>
-          <li><a href="#"><span class="fa-brands fa-square-instagram" style="color: #ffffff;"></span></a></li>
-          <li><a href="#"><span class="fa-brands fa-square-twitter" style="color: #ffffff;"></span></a></li>
+          <li><a href="#"><span class="mdi mdi-facebook" style="color: white;"></span></a></li>
+          <li><a href="#"><span class="mdi mdi-instagram" style="color: white;"></span></a></li>
+          <li><a href="#"><span class="mdi mdi-twitter" style="color: white;"></span></a></li>
         </ul>
       </div>
       <div id="div-contato-footer">
@@ -123,4 +121,5 @@ header {
 .hidden {
   transform: translateY(-100%);
 }
+
 </style>

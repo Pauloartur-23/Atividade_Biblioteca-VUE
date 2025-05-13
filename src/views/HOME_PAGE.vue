@@ -616,3 +616,98 @@ main #releases .carousel-control:hover {
   background-color: #003f3f;
 }
 </style>
+=======
+  main #benefict {
+    display: flex;
+    justify-content: space-between;
+    padding: 2vw 10vw;
+    border-bottom: 2px #27AE60 solid;
+    border-top: 2px #27AE60 solid;
+  }
+  main #benefict div{
+    padding-right: 7vw ;
+    display: flex;
+    border-right: 1px #937DC2 solid;
+  }
+  main #benefict #last-benefict {
+    padding-right: 0;
+    border-right: none;
+  }
+  main #benefict div span {
+    font-size: 50px;
+  }
+  main #benefict div h3{
+    font-size: 1.5rem;
+    margin-top: 1vw;
+    padding-left: 1vw;
+    font-weight: bold;
+    transition: all ease-in-out .5s;
+  }
+  main #benefict div h3 a:hover{
+    text-decoration: underline;
+  } 
+  main #benefict a{
+    color: #382C2C;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  /*======================
+     SECTION #RELEASES
+  ======================*/
+  main #releases {
+    padding: 5vw 13.5vw 5vw 15vw;
+  }
+  main #releases h2{
+    font-size: 2rem;
+    color: #231F2D;
+    margin-left: 2vw;
+    font-weight: bold;
+    margin-bottom: 2vw;
+  }
+  main #releases ul{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  main #releases ul li {
+    margin-right: 1.5vw;
+    margin-bottom: 5vw;
+  }
+  main #releases ul li h4{
+    font-size: 1.3rem;
+    color: #382C2C;
+    font-weight: bold;
+  }
+  main #releases ul li p{
+    color: #4F4C57;
+  }
+  
+  main #releases ul li #space-div{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1vw;
+  }
+  main #releases ul li #space-div p {
+    font-weight: bold;
+    color: #382C2C;
+  }
+  main #releases ul li #space-div span{
+    margin-right: 0.5vw;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.4s ease-in-out;
+  }
+  
+  main #releases button {
+    padding: 1vw 0;
+    background-color: #27AE60;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    width: 100%;
+    font-size: 1.1rem;
+    transition: all ease-in-out .5s;
+  }
+  main #releases button:hover{
+    background-color: #1d8046;
+  }
+</style> 
