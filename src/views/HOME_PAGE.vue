@@ -26,6 +26,17 @@ const saveFavorites = () => {
   localStorage.setItem('favorites', JSON.stringify(favorite.value))
 }
 
+const isFavorite = (id) => favorite.value.includes(id)
+
+const toggleFavorite = (id) => {
+  if (isFavorite(id)) {
+    favorite.value = favorite.value.filter(favId => favId !== id)
+  } else {
+    favorite.value.push(id)
+  }
+  saveFavorites()
+}
+
 const livros = [
   {
     img: ChainOfIron2,
@@ -54,7 +65,7 @@ const livros = [
   {
     img: NonaTheNinth,
     titulo: 'Nona the Ninth',
-    autor: 'Cassandra Clare',
+    autor: 'Tamsyn Muir',
     preco: 'R$16.84',
     id: '4',
     resumo: 'Uma história de mistério e magia, onde Nona deve desvendar segredos antigos para salvar seu mundo.'
@@ -62,7 +73,7 @@ const livros = [
   {
     img: HarlemShuffle,
     titulo: 'Harlem Shuffle',
-    autor: 'Cassandra Clare',
+    autor: 'Colson Whitehead',
     preco: 'R$26.92',
     id: '5',
     resumo: 'Uma história envolvente sobre família, crime e redenção no Harlem dos anos 1960.'
@@ -94,8 +105,8 @@ const livros = [
 ]
 
 const offerSlides = ref(livros)
-
 const currentOfferSlide = ref(0)
+
 const nextOfferSlide = () => {
   currentOfferSlide.value = (currentOfferSlide.value + 1) % offerSlides.value.length
 }
@@ -109,6 +120,7 @@ const startAutoPlay = () => {
   stopAutoPlay()
   autoPlayInterval.value = setInterval(nextOfferSlide, 5000)
 }
+
 const stopAutoPlay = () => {
   if (autoPlayInterval.value) {
     clearInterval(autoPlayInterval.value)
@@ -116,21 +128,7 @@ const stopAutoPlay = () => {
   }
 }
 
-const addItemLike = (livro) => {
-  cartStore.addItemLike(livro)
-}
-
-onMounted(() => {
-  loadFavorites()
-  startAutoPlay()
-})
-
-onUnmounted(() => {
-  stopAutoPlay()
-})
-
 const currentReleaseSlide = ref(0)
-
 const nextReleaseSlide = () => {
   currentReleaseSlide.value = (currentReleaseSlide.value + 1) % Math.ceil(livros.length / 4)
 }
@@ -139,17 +137,15 @@ const prevReleaseSlide = () => {
   currentReleaseSlide.value = (currentReleaseSlide.value - 1 + Math.ceil(livros.length / 4)) % Math.ceil(livros.length / 4)
 }
 
-const autoPlayReleaseInterval = ref(null)
-const stopAutoPlayRelease = () => {
-  if (autoPlayReleaseInterval.value) {
-    clearInterval(autoPlayReleaseInterval.value)
-    autoPlayReleaseInterval.value = null
+const addItemLike = (livro) => {
+  if (favorite.value.includes(livro.id)) {
+    favorite.value = favorite.value.filter(id => id !== livro.id)
+    cartStore.removeItemLike(livro.id)
+  } else {
+    favorite.value.push(livro.id)
+    cartStore.addItemLike(livro)
   }
 }
-
-onMounted(() => {
-  stopAutoPlayRelease()
-})
 
 const addToCart = (livro) => {
   const livroParaCarrinho = {
@@ -163,7 +159,17 @@ const addToCart = (livro) => {
   cartStore.addItem(livroParaCarrinho)
   router.push('/carrinho')
 }
+
+onMounted(() => {
+  loadFavorites()
+  startAutoPlay()
+})
+
+onUnmounted(() => {
+  stopAutoPlay()
+})
 </script>
+
 
 <template>
   <main id="home">
@@ -222,38 +228,38 @@ const addToCart = (livro) => {
       </a>
     </section>
     <section id="releases">
-    <h2>Lançamentos</h2>
-    <div class="releases-carousel-container">
-      <button class="carousel-control prev" @click="prevReleaseSlide">
-        <span class="mdi mdi-chevron-left"></span>
-      </button>
-      <div class="releases-carousel-wrapper">
-        <div class="releases-carousel" :style="{ transform: `translateX(-${currentReleaseSlide * 100}%)` }">
-          <div class="releases-carousel-item" v-for="(group, index) in Math.ceil(livros.length / 4)" :key="index">
-            <ul>
-              <li v-for="livro in livros.slice(index * 4, (index + 1) * 4)" :key="livro.id">
-                <img :src="livro.img" :alt="livro.titulo">
-                <h4>{{ livro.titulo }}</h4>
-                <p>{{ livro.autor }}</p>
-                <div class="space-div">
-                  <p>{{ livro.preco }}</p>
-                  <span class="fa-solid fa-heart" :style="{ color: livro.isFavorite ?  'red' : '#008B8B' }"
-                    @click="addItemLike(livro)"></span>
-                </div>
-                <button @click="addToCart(livro)">
-                  <span class="mdi mdi-cart"></span>
-                  Comprar
-                </button>
-              </li>
-            </ul>
+      <h2>Lançamentos</h2>
+      <div class="releases-carousel-container">
+        <button class="carousel-control prev" @click="prevReleaseSlide">
+          <span class="mdi mdi-chevron-left"></span>
+        </button>
+        <div class="releases-carousel-wrapper">
+          <div class="releases-carousel" :style="{ transform: `translateX(-${currentReleaseSlide * 100}%)` }">
+            <div class="releases-carousel-item" v-for="(group, index) in Math.ceil(livros.length / 4)" :key="index">
+              <ul>
+                <li v-for="livro in livros.slice(index * 4, (index + 1) * 4)" :key="livro.id">
+                  <img :src="livro.img" :alt="livro.titulo">
+                  <h4>{{ livro.titulo }}</h4>
+                  <p>{{ livro.autor }}</p>
+                  <div class="space-div">
+                    <p>{{ livro.preco }}</p>
+                    <span class="fa-solid fa-heart" :style="{ color: !isFavorite(livro.id) ? 'red' : '#008B8B' }"
+                      @click="toggleFavorite(livro.id); addItemLike(livro)"></span>
+                  </div>
+                  <button @click="addToCart(livro)">
+                    <span class="mdi mdi-cart"></span>
+                    Comprar
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
+        <button class="carousel-control next" @click="nextReleaseSlide">
+          <span class="mdi mdi-chevron-right"></span>
+        </button>
       </div>
-      <button class="carousel-control next" @click="nextReleaseSlide">
-        <span class="mdi mdi-chevron-right"></span>
-      </button>
-    </div>
-  </section>
+    </section>
   </main>
 </template>
 
