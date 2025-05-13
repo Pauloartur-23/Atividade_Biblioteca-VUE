@@ -1,8 +1,15 @@
 <script setup>
 import { useCartStore } from '../stores/store'
 import { RouterLink } from 'vue-router'
+import { ref } from 'vue'
 
 const cartStore = useCartStore()
+const couponCode = ref('')
+
+const validCoupons = {
+  'Kennedy10': 0.10,
+  'Eduardo20': 0.20
+}
 
 const formatPrice = (price) => {
   return `R$${parseFloat(price).toFixed(2)}`
@@ -17,24 +24,20 @@ const updateQuantity = (itemId, newQuantity) => {
 }
 
 const calculateSubtotal = (item) => {
-  const price = parseFloat(item.preco.replace('R$', ''))
+  const price = parseFloat(item.preco.replace('R$', '').replace(',', '.'))
   return formatPrice(price * item.quantity)
 }
 
 const applyCoupon = () => {
-  const couponInput = document.querySelector('.coupon-section input')
-  const couponCode = couponInput.value.trim()
-  
-  if (couponCode === 'Kennedy10') {
-    cartStore.applyCoupon(couponCode)
-  } else if (couponCode === 'Eduardo20') {
-    cartStore.applyCoupon(couponCode)
+  const code = couponCode.value.trim()
+  if (validCoupons[code]) {
+    cartStore.applyCoupon(code)
   }
 }
 
 const removeCoupon = () => {
   cartStore.removeCoupon()
-  document.querySelector('.coupon-section input').value = ''
+  couponCode.value = ''
 }
 </script>
 
@@ -75,23 +78,11 @@ const removeCoupon = () => {
         <RouterLink to="/" class="back-button">Voltar para loja</RouterLink>
         <div class="cart-footer">
           <div class="coupon-section">
-            <input 
-              type="text" 
-              placeholder="Código do cupom"
-              :disabled="cartStore.discount > 0"
-            >
-            <button 
-              v-if="!cartStore.discount" 
-              @click="applyCoupon" 
-              class="coupon-button"
-            >
+           <input v-model="couponCode" type="text" placeholder="Código do cupom" :disabled="cartStore.discount > 0">
+            <button v-if="!cartStore.discount" @click="applyCoupon" class="coupon-button">
               Inserir Cupom
             </button>
-            <button 
-              v-else 
-              @click="removeCoupon" 
-              class="remove-coupon-button"
-            >
+            <button v-else @click="removeCoupon" class="remove-coupon-button">
               Remover Cupom
             </button>
           </div>
@@ -125,7 +116,7 @@ const removeCoupon = () => {
 
 <style scoped>
 main {
-  padding: 5vw 15vw;
+  padding: 15vw 15vw 5vw 15vw;
   margin: 0 auto;
   background-color: white;
 }
@@ -141,7 +132,7 @@ main #carrinho-code .empty-cart p {
 }
 
 main #carrinho-code h1 {
-  color: #27ae60;
+  color: #008B8B;
   font-size: 2.5rem;
   margin-bottom: 2rem;
   font-weight: bold;
@@ -151,11 +142,11 @@ main #carrinho-code .cart-header {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   padding: 1rem 0;
-  border-bottom: 1px solid #27ae60;
+  border-bottom: 1px solid #008B8B;
   color: #333;
 }
 
-main #carrinho-code .cart-header p{
+main #carrinho-code .cart-header p {
   font-size: 1.5rem;
   color: #382C2C;
   font-weight: bold;
@@ -171,7 +162,7 @@ main #carrinho-code .cart-items li {
   grid-template-columns: 2fr 1fr 1fr;
   align-items: center;
   padding: 2rem 0;
-  border-bottom: 1px solid #27ae60;
+  border-bottom: 1px solid #008B8B;
 }
 
 main #carrinho-code .item-info {
@@ -180,8 +171,8 @@ main #carrinho-code .item-info {
 }
 
 main #carrinho-code .item-info img {
-  width: 100px;
-  height: 150px;
+  width: 120px;
+  height: auto;
   object-fit: cover;
 }
 
@@ -197,7 +188,7 @@ main #carrinho-code .item-details p {
   margin: 0.25rem 0;
 }
 
-main #carrinho-code .item-details p span{
+main #carrinho-code .item-details p span {
   font-weight: bold;
   color: #382C2C;
   font-size: 1.3rem;
@@ -209,11 +200,11 @@ main #carrinho-code .quantity-controls {
   gap: 1rem;
 }
 
-main #carrinho-code .quantity-controls-buttons{
+main #carrinho-code .quantity-controls-buttons {
   display: flex;
   align-items: center;
   gap: 1rem;
-  border: 1px solid #000000;
+  border: 1px solid #4F4C57;
   border-radius: 4px;
 }
 
@@ -222,7 +213,7 @@ main #carrinho-code .quantity-controls button {
   height: 60px;
   border: none;
   background: white;
-  color: #000000;
+  color: #4F4C57;
   font-size: 1.2rem;
   cursor: pointer;
   display: flex;
@@ -233,7 +224,7 @@ main #carrinho-code .quantity-controls button {
 }
 
 main #carrinho-code .quantity-controls p {
-  color: #000000;
+  color: #4F4C57;
   margin: 0;
   font-size: 1.1rem;
   min-width: 20px;
@@ -250,8 +241,8 @@ main #carrinho-code .subtotal {
 main #carrinho-code .back-button {
   display: inline-block;
   padding: 0.8rem 1.5rem;
-  border: 1px solid #27ae60;
-  color: #27ae60;
+  border: 1px solid #008B8B;
+  color: #008B8B;
   text-decoration: none;
   margin: 2rem 0;
   border-radius: 4px;
@@ -279,13 +270,13 @@ main #carrinho-code .coupon-section input {
   height: 60px;
 }
 
-main #carrinho-code .coupon-section input:focus{
+main #carrinho-code .coupon-section input:focus {
   outline: none;
 }
 
 main #carrinho-code .coupon-button {
   padding: 0.8rem 1.5rem;
-  background: #27ae60;
+  background: #008B8B;
   color: white;
   border: none;
   border-radius: 4px;
@@ -308,12 +299,12 @@ main #carrinho-code .remove-coupon-button {
 main #carrinho-code .total-section {
   padding: 2rem;
   border-radius: 4px;
-  border: 1px solid #000000;
+  border: 1px solid #382C2C;
 }
 
 main #carrinho-code .total-section h2 {
   margin-bottom: 1.5rem;
-  color: #000000;
+  color: #382C2C;
   font-weight: bold;
   font-size: 1.5rem;
 }
@@ -328,13 +319,13 @@ main #carrinho-code .total-section li {
   justify-content: space-between;
   padding-bottom: 1vw;
   padding-top: 1vw;
-  color: #000000;
-  border-bottom: 1px solid #909090;
+  color: #4F4C57;
+  border-bottom: 1px solid #4F4C57;
 }
 
 main #carrinho-code .total-section li.total {
   font-weight: bold;
-  color: #000000;
+  color: #4F4C57;
   padding-top: 1rem;
   margin-top: 1rem;
   border-bottom: none;
@@ -343,7 +334,7 @@ main #carrinho-code .total-section li.total {
 main #carrinho-code .checkout-button {
   width: 100%;
   padding: 1rem;
-  background: #27ae60;
+  background: #008B8B;
   color: white;
   border: none;
   border-radius: 4px;
@@ -355,7 +346,7 @@ main #carrinho-code .checkout-button {
 
 main #carrinho-code .checkout-button:hover,
 main #carrinho-code .coupon-button:hover {
-  background: #1d8046;
+  background: #003f3f;
 }
 
 main #carrinho-code .remove-coupon-button:hover {
@@ -363,12 +354,12 @@ main #carrinho-code .remove-coupon-button:hover {
 }
 
 main #carrinho-code .back-button:hover {
-  background: #1d8046;
+  background: #003f3f;
   color: white;
 }
 
 main #carrinho-code .quantity-controls button:hover {
-  background: #1d8046;
+  background: #003f3f;
   color: white;
 }
-</style> 
+</style>
