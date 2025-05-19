@@ -84,10 +84,6 @@ main section form input:focus {
     outline: none;
 }
 
-main section form .div-input-name input{
-    
-}
-
 
 main section form button {
     background-color: #008B8B;
